@@ -1,6 +1,12 @@
+import AccessibilityTabs from "@/components/AccessibilityTabs";
 import "../global.css";
 import { Slot } from "expo-router";
 
 export default function App() {
-  return <Slot />;
+  return (
+    <>
+      <Slot />
+      <AccessibilityTabs />
+    </>
+  );
 }
