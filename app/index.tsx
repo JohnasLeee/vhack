@@ -1,5 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, TouchableOpacity, View,Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  ScrollView,
+  Button,
+} from "react-native";
 import "../global.css";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
@@ -9,6 +17,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useState } from "react";
 
 const DoctorCard = ({
   name,
@@ -24,14 +33,17 @@ const DoctorCard = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="m-2 p-4 rounded-lg shadow-lg flex flex-row"  style={{backgroundColor:"#E1E3Ef"}}
+      className="m-2 p-4 rounded-lg shadow-lg flex flex-row"
+      style={{ backgroundColor: "#E1E3Ef" }}
     >
-        <Image className="h-24 w-24 " style={{borderRadius:"4px"}}
-          source={{ uri: picture }} 
-        />
+      <Image
+        className="h-24 w-24 "
+        style={{ borderRadius: "4px" }}
+        source={{ uri: picture }}
+      />
       <View className="p-2">
-      <Text className="font-medium text-lg p-2">{name}</Text>
-      <Text className="text-gray-600 p-2">{specialty}</Text>
+        <Text className="font-medium text-lg p-2">{name}</Text>
+        <Text className="text-gray-600 p-2">{specialty}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -60,30 +72,159 @@ const NavItem = ({
 };
 
 export default function App() {
+  const [isDoctorClicked, setIsDoctorClicked] = useState({doctor:-1, book:false});
   const doctors = [
-    { id: 1, name: "Dr. Crendan Bhoo", specialty: "Cardiologist", picture:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLF4PqJxXw4wKiZ_xaY4zg6NAcpgAgIO4uag&s" },
-    { id: 2, name: "Dr. Yee Ling Shen", specialty: "Dermatologist" , picture:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWFm9gYHhhhLtKgQQCWigWE3JrszddFG4g8xxOZhHSOgmyKZqUwaRGI3_zWLDgjk_XbR8GR_Bxjk4-2wMBWCAFP64v7ab7h2iUEV4gHA5-TvMSoBnERud0vXVmLn2wFVQvjkYFurnEdDE/s640/E7_4.jpg"},
-    { id: 3, name: "Dr. You Shung Ungng", specialty: "Neurologist" , picture:"https://static.wikia.nocookie.net/fe820b3f-45b0-420b-b1ee-7d037e981e7c/scale-to-width/755"},
+    {
+      id: 0,
+      name: "Dr. Crendan Bhoo",
+      specialty: "Cardiologist",
+      picture:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLF4PqJxXw4wKiZ_xaY4zg6NAcpgAgIO4uag&s",
+      roomNo: 609,
+      contactNumber: "+1 234 567 890",
+      email: "crendan@hospital.com",
+      officeHours: "Monday - Friday: 9:00 AM - 5:00 PM",
+      degrees: ["MD", "FACC", "Cardiology Fellow"],
+      biography:
+        "Dr. Crendan Bhoo is a highly experienced cardiologist with expertise in diagnosing and treating cardiovascular diseases. He has been practicing for over 15 years and is known for his patient-centered approach and dedication to improving heart health.",
+      certifications: [
+        "Board Certified in Cardiology",
+        "Certified in Advanced Cardiac Life Support (ACLS)",
+        "Certified in Echocardiography",
+      ],
+      appointmentAvailability: {
+        monday: "9:00 AM - 5:00 PM",
+        tuesday: "9:00 AM - 5:00 PM",
+        wednesday: "9:00 AM - 5:00 PM",
+        thursday: "9:00 AM - 5:00 PM",
+        friday: "9:00 AM - 5:00 PM",
+        saturday: "Closed",
+        sunday: "Closed",
+      },
+    },
+    {
+      id: 1,
+      name: "Dr. Yee Ling Shen",
+      specialty: "Dermatologist",
+      picture:
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWFm9gYHhhhLtKgQQCWigWE3JrszddFG4g8xxOZhHSOgmyKZqUwaRGI3_zWLDgjk_XbR8GR_Bxjk4-2wMBWCAFP64v7ab7h2iUEV4gHA5-TvMSoBnERud0vXVmLn2wFVQvjkYFurnEdDE/s640/E7_4.jpg",
+      roomNo: 410,
+      contactNumber: "+1 234 567 891",
+      email: "dr.yee.shen@hospital.com",
+      officeHours:
+        "Monday - Thursday: 8:30 AM - 4:30 PM, Friday: 8:30 AM - 12:00 PM",
+      degrees: ["MD", "Board-Certified Dermatologist"],
+      biography:
+        "Dr. Yee Ling Shen specializes in the treatment of various skin conditions, including acne, eczema, and skin cancer. With over 10 years of experience, Dr. Shen is dedicated to providing individualized skincare treatments for her patients.",
+      certifications: [
+        "Board Certified in Dermatology",
+        "Licensed in Cosmetic Dermatology",
+        "Certified in Mohs Surgery",
+      ],
+      appointmentAvailability: {
+        monday: "8:30 AM - 4:30 PM",
+        tuesday: "8:30 AM - 4:30 PM",
+        wednesday: "8:30 AM - 4:30 PM",
+        thursday: "8:30 AM - 4:30 PM",
+        friday: "8:30 AM - 12:00 PM",
+        saturday: "Closed",
+        sunday: "Closed",
+      },
+    },
+    {
+      id: 2,
+      name: "Dr. You Shung Ungng",
+      specialty: "Neurologist",
+      picture:
+        "https://static.wikia.nocookie.net/fe820b3f-45b0-420b-b1ee-7d037e981e7c/scale-to-width/755",
+      roomNo: 314,
+      contactNumber: "+1 234 567 892",
+      email: "dr.you.shung.ungng@hospital.com",
+      officeHours: "Monday - Friday: 9:00 AM - 5:00 PM",
+      degrees: ["MD", "Neurology Specialist", "PhD in Neuroscience"],
+      biography:
+        "Dr. You Shung Ungng is a skilled neurologist with expertise in treating complex neurological conditions like epilepsy, migraines, and neurodegenerative diseases. He is passionate about advancing neurological research and improving the quality of life for his patients.",
+      certifications: [
+        "Board Certified in Neurology",
+        "Certified in Epilepsy Management",
+        "Certified in Neuroimaging",
+      ],
+      appointmentAvailability: {
+        monday: "9:00 AM - 5:00 PM",
+        tuesday: "9:00 AM - 5:00 PM",
+        wednesday: "9:00 AM - 5:00 PM",
+        thursday: "9:00 AM - 5:00 PM",
+        friday: "9:00 AM - 5:00 PM",
+        saturday: "Closed",
+        sunday: "Closed",
+      },
+    },
+    {
+      id: 3,
+      name: "Dr. Ts Pmo Icl",
+      specialty: "Neurologist",
+      picture:
+        "https://static.wikia.nocookie.net/fe820b3f-45b0-420b-b1ee-7d037e981e7c/scale-to-width/755",
+      roomNo: 412,
+      contactNumber: "+1 234 567 893",
+      email: "dr.ts.pmo.icl@hospital.com",
+      officeHours: "Monday - Friday: 10:00 AM - 6:00 PM",
+      degrees: ["MD", "Neurology Specialist", "Clinical Research Fellow"],
+      biography:
+        "Dr. Ts Pmo Icl is a renowned neurologist specializing in stroke management and rehabilitation. With extensive research experience in neurology, Dr. Icl works with cutting-edge therapies to improve recovery and prevent recurrence in stroke patients.",
+      certifications: [
+        "Board Certified in Neurology",
+        "Certified in Stroke Care",
+        "Advanced Training in Neurorehabilitation",
+      ],
+      appointmentAvailability: {
+        monday: "10:00 AM - 6:00 PM",
+        tuesday: "10:00 AM - 6:00 PM",
+        wednesday: "10:00 AM - 6:00 PM",
+        thursday: "10:00 AM - 6:00 PM",
+        friday: "10:00 AM - 6:00 PM",
+        saturday: "Closed",
+        sunday: "Closed",
+      },
+    },
   ];
+
   return (
-    <View className="p-0 flex">
+    <ScrollView className="p-0 ">
       <View
         className="p-0 w-full h-24 flex justify-center text-center"
         style={{ backgroundColor: "#CAD0DE" }}
       >
         <p>Select Doctor</p>
       </View>
+
+      {isDoctorClicked.book ? (
+  <View className="p-4">
+    <DoctorCard
+              key={doctors[isDoctorClicked.doctor].id}
+              name={doctors[isDoctorClicked.doctor].name}
+              specialty={doctors[isDoctorClicked.doctor].specialty}
+              picture={doctors[isDoctorClicked.doctor].picture}
+              onPress={() => 1+1}
+            />
+            <View style={{ fontSize: '14px', padding: '1rem', alignItems:"center",textAlign: "center" }} >
+              <p>You’re about to have a tele-consultation with {doctors[isDoctorClicked.doctor].name}. Get ready to be touched.</p>
+            </View>
+  </View>
+) : (
+  isDoctorClicked.doctor === -1 ? (
+    <View>
       <View className="p-4">
-        <p>Select a Doctor </p>
+        <p>Select a Doctor</p>
       </View>
       <View className="p-4">
         <input
-          className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md "
+          className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
           aria-label="lorem ipsum"
           type="text"
           id="name"
           name="name"
-        ></input>
+        />
       </View>
       <View>
         <View className="p-2">
@@ -93,12 +234,60 @@ export default function App() {
               name={doctor.name}
               specialty={doctor.specialty}
               picture={doctor.picture}
-              onPress={() => console.log(`Selected ${doctor.name}`)} // You can replace this with navigation or other logic
+              onPress={() => setIsDoctorClicked({ doctor: doctor.id, book: false })}
             />
           ))}
         </View>
       </View>
     </View>
+  ) : (
+    <View>
+      <View className="p-2">
+        <TouchableOpacity onPress={() => setIsDoctorClicked({ doctor: -1, book: false })}>
+          Back
+        </TouchableOpacity>
+      </View>
+      <View className="p-4">
+        <View>
+          <p>{doctors[isDoctorClicked.doctor].name}</p>
+        </View>
+        <View  className="m-2 p-4 rounded-lg shadow-lg flex flex-row"
+      style={{ backgroundColor: "#E1E3Ef" }}>
+          <View>
+            <Image
+              className="h-24 w-24"
+              style={{ borderRadius: '4px' }}
+              source={{ uri: doctors[isDoctorClicked.doctor].picture }}
+            />
+          </View>
+          <View style={{ fontSize: '14px', paddingLeft: '1rem' }}>
+            <p>Email: {doctors[isDoctorClicked.doctor].email}</p>
+            <p>Tel: {doctors[isDoctorClicked.doctor].contactNumber}</p>
+            <p>Room: {doctors[isDoctorClicked.doctor].roomNo}</p>
+          </View>
+        </View>
+        <View style={{ fontSize: '14px', paddingTop: '1rem' }}>
+          <h2 style={{ fontSize: '18px', fontWeight: 'bold' }}>Biography</h2>
+          <p>{doctors[isDoctorClicked.doctor].biography}</p>
+        </View>
+        <View style={{ fontSize: '14px', paddingTop: '1rem' }}>
+          {Object.entries(doctors[isDoctorClicked.doctor].appointmentAvailability).map(([day, time]) => (
+            <p key={day}>
+              <strong>{day.charAt(0).toUpperCase() + day.slice(1)}:</strong> {time}
+            </p>
+          ))}
+        </View>
+      </View>
+      <View className="justify-center items-center">
+        <View className="h-16 w-24">
+          <Button title="Book Me" onPress={() => setIsDoctorClicked({ doctor: isDoctorClicked.doctor, book: true })} />
+        </View>
+      </View>
+    </View>
+  )
+)}
+
+    </ScrollView>
   );
 }
 
