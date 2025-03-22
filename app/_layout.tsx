@@ -44,7 +44,7 @@ export default function RootLayout() {
           } as NativeStackNavigationOptions} 
         />
       <Stack.Screen 
-        name="appointment" 
+        name="new-appointment" 
         options={{
           headerShown: true,
           headerShadowVisible: false,

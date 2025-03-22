@@ -70,8 +70,8 @@ export default function App() {
               />
             <NavItem
               icon={<FontAwesome6 name="user-doctor" size={42} color="black" />}
-              text="Find a Specialist"
-              onPress={() => console.log("Icon 3 pressed")}
+              text="Current Appointment"
+              onPress={() => router.push("/current-appointment")}
             />
           </View>
           <View className="flex flex-row gap-4">
