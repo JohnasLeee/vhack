@@ -24,6 +24,36 @@ export default function RootLayout() {
           title: 'Reports',
         } as NativeStackNavigationOptions} 
       />
+      <Stack.Screen 
+        name="appointment" 
+        options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: '#fbbf24',
+          },
+          headerTintColor: '#374151',
+          headerTitleStyle: {
+            fontWeight: '600',
+          },
+          title: 'Appointment',
+        } as NativeStackNavigationOptions} 
+      />
+      <Stack.Screen 
+        name="teleconsultation" 
+        options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: '#fbbf24',
+          },
+          headerTintColor: '#374151',
+          headerTitleStyle: {
+            fontWeight: '600',
+          },
+          title: 'Teleconsultation',
+        } as NativeStackNavigationOptions} 
+      />
     </Stack>
   );
 }
