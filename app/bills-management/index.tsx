@@ -66,7 +66,7 @@ const PaymentCard = ({ payment }: { payment: Payment }) => (
   >
     <View className="flex-row justify-between mb-2">
       <Text className="text-lg font-bold">{payment.doctorName}</Text>
-      <Text className="font-bold">${payment.amount.toFixed(2)}</Text>
+      <Text className="font-bold">RM{payment.amount.toFixed(2)}</Text>
     </View>
     <View className="mb-1">
       <Text className="text-gray-600">{payment.hospitalName}</Text>
