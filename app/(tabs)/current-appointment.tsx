@@ -19,9 +19,6 @@ const Appointment = () => {
             />
           ))}
         </View>
-        <Text className="text-center text-sm">
-          Click a doctor to book an appointment.
-        </Text>
       </View>
 
       <View>

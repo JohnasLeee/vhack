@@ -61,7 +61,7 @@ export default function App() {
             <NavItem
               icon={<AntDesign name="calendar" size={42} color="black" />}
               text="Book an Appointment"
-              onPress={() => router.push("/appointment")}
+              onPress={() => router.push("/(tabs)")}
             />
               <NavItem
                 icon={<Ionicons name="document-text" size={42} color="black" />}
