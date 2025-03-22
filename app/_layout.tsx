@@ -44,7 +44,7 @@ export default function RootLayout() {
           } as NativeStackNavigationOptions} 
         />
       <Stack.Screen 
-        name="new-appointment" 
+        name="current-appointment" 
         options={{
           headerShown: true,
           headerShadowVisible: false,
@@ -55,7 +55,7 @@ export default function RootLayout() {
           headerTitleStyle: {
             fontWeight: '600',
           },
-          title: 'Appointment',
+          title: 'Current Appointment',
         } as NativeStackNavigationOptions} 
       />
       <Stack.Screen 
