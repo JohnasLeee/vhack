@@ -72,7 +72,11 @@ const NavItem = ({
 };
 
 export default function App() {
-  const [isDoctorClicked, setIsDoctorClicked] = useState({doctor:-1, book:false});
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isDoctorClicked, setIsDoctorClicked] = useState({
+    doctor: -1,
+    book: false,
+  });
   const doctors = [
     {
       id: 0,
@@ -189,6 +193,10 @@ export default function App() {
     },
   ];
 
+
+  const filteredDoctors = doctors.filter(doctor =>
+    doctor.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <ScrollView className="p-0 ">
       <View
@@ -199,94 +207,178 @@ export default function App() {
       </View>
 
       {isDoctorClicked.book ? (
-  <View className="p-4">
-    <DoctorCard
-              key={doctors[isDoctorClicked.doctor].id}
-              name={doctors[isDoctorClicked.doctor].name}
-              specialty={doctors[isDoctorClicked.doctor].specialty}
-              picture={doctors[isDoctorClicked.doctor].picture}
-              onPress={() => 1+1}
-            />
-            <View style={{ fontSize: '14px', padding: '1rem', alignItems:"center",textAlign: "center" }} >
-              <p>You’re about to have a tele-consultation with {doctors[isDoctorClicked.doctor].name}. Get ready to be touched.</p>
-            </View>
-  </View>
-) : (
-  isDoctorClicked.doctor === -1 ? (
-    <View>
-      <View className="p-4">
-        <p>Select a Doctor</p>
-      </View>
-      <View className="p-4">
-        <input
-          className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
-          aria-label="lorem ipsum"
-          type="text"
-          id="name"
-          name="name"
-        />
-      </View>
-      <View>
-        <View className="p-2">
-          {doctors.map((doctor) => (
-            <DoctorCard
-              key={doctor.id}
-              name={doctor.name}
-              specialty={doctor.specialty}
-              picture={doctor.picture}
-              onPress={() => setIsDoctorClicked({ doctor: doctor.id, book: false })}
-            />
-          ))}
-        </View>
-      </View>
-    </View>
-  ) : (
-    <View>
-      <View className="p-2">
-        <TouchableOpacity onPress={() => setIsDoctorClicked({ doctor: -1, book: false })}>
-          Back
-        </TouchableOpacity>
-      </View>
-      <View className="p-4">
-        <View>
-          <p>{doctors[isDoctorClicked.doctor].name}</p>
-        </View>
-        <View  className="m-2 p-4 rounded-lg shadow-lg flex flex-row"
-      style={{ backgroundColor: "#E1E3Ef" }}>
-          <View>
-            <Image
-              className="h-24 w-24"
-              style={{ borderRadius: '4px' }}
-              source={{ uri: doctors[isDoctorClicked.doctor].picture }}
-            />
-          </View>
-          <View style={{ fontSize: '14px', paddingLeft: '1rem' }}>
-            <p>Email: {doctors[isDoctorClicked.doctor].email}</p>
-            <p>Tel: {doctors[isDoctorClicked.doctor].contactNumber}</p>
-            <p>Room: {doctors[isDoctorClicked.doctor].roomNo}</p>
-          </View>
-        </View>
-        <View style={{ fontSize: '14px', paddingTop: '1rem' }}>
-          <h2 style={{ fontSize: '18px', fontWeight: 'bold' }}>Biography</h2>
-          <p>{doctors[isDoctorClicked.doctor].biography}</p>
-        </View>
-        <View style={{ fontSize: '14px', paddingTop: '1rem' }}>
-          {Object.entries(doctors[isDoctorClicked.doctor].appointmentAvailability).map(([day, time]) => (
-            <p key={day}>
-              <strong>{day.charAt(0).toUpperCase() + day.slice(1)}:</strong> {time}
+        <View className="p-4">
+          <DoctorCard
+            key={doctors[isDoctorClicked.doctor].id}
+            name={doctors[isDoctorClicked.doctor].name}
+            specialty={doctors[isDoctorClicked.doctor].specialty}
+            picture={doctors[isDoctorClicked.doctor].picture}
+            onPress={() => 1 + 1}
+          />
+          <View
+            style={{
+              fontSize: "14px",
+              padding: "1rem",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <p>
+              You’re about to have a tele-consultation with{" "}
+              {doctors[isDoctorClicked.doctor].name}. Get ready to be touched.
             </p>
-          ))}
-        </View>
-      </View>
-      <View className="justify-center items-center">
-        <View className="h-16 w-24">
-          <Button title="Book Me" onPress={() => setIsDoctorClicked({ doctor: isDoctorClicked.doctor, book: true })} />
-        </View>
-      </View>
-    </View>
-  )
-)}
+          </View>
+          <View>
+          <View>
+            <p style={{ paddingBottom: "1rem" }}>Date</p>
+            <View className="">
+              <input
+                type="date"
+                className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
+                aria-label="Select date"
+                id="date"
+                name="date"
+              />
+            </View>
 
+          </View>
+
+          <View>
+            <p style={{ paddingBottom: "1rem", paddingTop: "1rem" }}>Time</p>
+            <View className="">
+              <select
+                className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
+                aria-label="Select time"
+                id="time"
+                name="time"
+              >
+                {/* Generate options for times from 10 AM to 5 PM */}
+                {Array.from({ length: 8 }, (_, index) => {
+                  const hour = 10 + index;
+                  const formattedTime = `${hour % 12 || 12} ${
+                    hour < 12 ? "AM" : "PM"
+                  }`;
+                  return (
+                    <option key={hour} value={formattedTime}>
+                      {formattedTime}
+                    </option>
+                  );
+                })}
+              </select>
+            </View>
+            </View>
+          </View>
+          <View className="justify-center items-center p-4">
+            <View className="h-16 w-24 rounded-lg">
+              <Button
+                title="Book"
+                onPress={() =>
+                  setIsDoctorClicked({
+                    doctor: -1,
+                    book: false,
+                  })
+                }
+              />
+            </View>
+          </View>
+        </View>
+      ) : isDoctorClicked.doctor === -1 ? (
+        <View>
+ <View className="p-4">
+      <p>Select a Doctor</p>
+    </View>
+    <View className="p-4">
+      <input
+        className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
+        aria-label="Search doctor"
+        type="text"
+        id="name"
+        name="name"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)} // Update search term on change
+        placeholder="Search for a doctor"
+      />
+    </View>
+    <View className="p-2">
+      {(filteredDoctors.length > 0 || searchTerm == "" )? (
+        filteredDoctors.map((doctor) => (
+          <DoctorCard
+            key={doctor.id}
+            name={doctor.name}
+            specialty={doctor.specialty}
+            picture={doctor.picture}
+            onPress={() =>
+              setIsDoctorClicked({ doctor: doctor.id, book: false })
+            }
+          />
+        ))
+      ) : (
+        <p>No doctors found</p>
+      )}
+    </View>
+        </View>
+      ) : (
+        <View>
+          <View className="p-2">
+            <TouchableOpacity
+              onPress={() => setIsDoctorClicked({ doctor: -1, book: false })}
+            >
+              Back
+            </TouchableOpacity>
+          </View>
+          <View className="p-4">
+            <View>
+              <p>{doctors[isDoctorClicked.doctor].name}</p>
+            </View>
+            <View
+              className="m-2 p-4 rounded-lg shadow-lg flex flex-row"
+              style={{ backgroundColor: "#E1E3Ef" }}
+            >
+              <View>
+                <Image
+                  className="h-24 w-24"
+                  style={{ borderRadius: "4px" }}
+                  source={{ uri: doctors[isDoctorClicked.doctor].picture }}
+                />
+              </View>
+              <View style={{ fontSize: "14px", paddingLeft: "1rem" }}>
+                <p>Email: {doctors[isDoctorClicked.doctor].email}</p>
+                <p>Tel: {doctors[isDoctorClicked.doctor].contactNumber}</p>
+                <p>Room: {doctors[isDoctorClicked.doctor].roomNo}</p>
+              </View>
+            </View>
+            <View style={{ fontSize: "14px", paddingTop: "1rem" }}>
+              <h2 style={{ fontSize: "18px", fontWeight: "bold" }}>
+                Biography
+              </h2>
+              <p>{doctors[isDoctorClicked.doctor].biography}</p>
+            </View>
+            <View style={{ fontSize: "14px", paddingTop: "1rem" }}>
+              {Object.entries(
+                doctors[isDoctorClicked.doctor].appointmentAvailability
+              ).map(([day, time]) => (
+                <p key={day}>
+                  <strong>{day.charAt(0).toUpperCase() + day.slice(1)}:</strong>{" "}
+                  {time}
+                </p>
+              ))}
+            </View>
+          </View>
+          <View className="justify-center items-center">
+            <View className="h-16 w-24 rounded-lg">
+              <Button
+                title="Select Doctor"
+                onPress={() =>
+                  setIsDoctorClicked({
+                    doctor: isDoctorClicked.doctor,
+                    book: true,
+                  })
+                }
+              />
+            </View>
+          </View>
+        </View>
+      )}
     </ScrollView>
   );
 }
