@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { DoctorComponent } from "@/components/DoctorComponent";
+import { Doctors } from "@/constants/Doctors";
 
 const Appointment = () => {
   return (
@@ -8,20 +9,19 @@ const Appointment = () => {
       <View>
         <Text className="font-bold text-xl">My Doctors</Text>
         <View className="flex flex-col gap-4 my-4">
-          <DoctorComponent
-            url="https://i0.pickpik.com/photos/607/614/347/nurse-medicine-doctor-hospital-preview.jpg"
-            name="Dr. Jane Doe"
-            specialization="General Practitioner"
-            phone="011-456 7890"
-          />
-          <DoctorComponent
-            url="https://images.pexels.com/photos/19438560/pexels-photo-19438560/free-photo-of-doctor.jpeg"
-            name="Dr. John Smith"
-            specialization="Cardiologist"
-            phone="017-654 3210"
-          />
+          {Doctors.map((doctor) => (
+            <DoctorComponent
+              key={doctor.name}
+              url={doctor.url}
+              name={doctor.name}
+              specialization={doctor.specialization}
+              phone={doctor.phone}
+            />
+          ))}
         </View>
-        <Text className="text-center text-sm">Click a doctor to book an appointment.</Text>
+        <Text className="text-center text-sm">
+          Click a doctor to book an appointment.
+        </Text>
       </View>
 
       <View>
@@ -38,7 +38,9 @@ const Appointment = () => {
             <Text>Type: Medical Examination</Text>
           </View>
         </View>
-        <Text className="text-center text-sm">Click an appointment to cancel.</Text>
+        <Text className="text-center text-sm">
+          Click an appointment to cancel.
+        </Text>
       </View>
     </View>
   );
