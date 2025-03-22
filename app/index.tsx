@@ -9,6 +9,7 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Link } from "expo-router";
+import AccessibilityTabs from "@/components/AccessibilityTabs";
 
 const NavItem = ({
   icon,
@@ -34,7 +35,7 @@ const NavItem = ({
 
 export default function App() {
   return (
-    <View className="p-0 flex">
+    <View className="flex-1">
       <LinearGradient
         // Background Linear Gradient
         colors={["#0A243B", "#4E5F69"]}
@@ -42,7 +43,7 @@ export default function App() {
         end={{ x: 0.66, y: 1 }}
         style={styles.background}
       />
-      <View className="flex">
+      <View className="flex-1">
         <View className="flex text-center flex-row gap-4 m-4 mb-0 items-center">
           <View className="bg-white w-12 h-12 p-2 rounded-full flex justify-center items-center">
             <FontAwesome name="user" size={24} color="black" />
@@ -102,6 +103,7 @@ export default function App() {
           </View>
         </View>
       </View>
+      <AccessibilityTabs />
     </View>
   );
 }

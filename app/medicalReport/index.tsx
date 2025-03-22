@@ -1,7 +1,26 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { router } from 'expo-router';
 import AccessibilityTabs from "@/components/AccessibilityTabs";
 import { Ionicons, AntDesign } from '@expo/vector-icons';
+
+// Add type for medical report data
+type MedicalReportData = {
+  height: string;
+  weight: string;
+  bmi: string;
+  bp: string;
+  pulse: string;
+  tests: {
+    category: string;
+    items: Array<{
+      name: string;
+      result: string;
+      unit: string;
+      range: string;
+    }>;
+  }[];
+};
 
 const MedicalReport = () => {
   const [activeTab, setActiveTab] = useState<'profile' | 'history'>('profile');
@@ -49,11 +68,57 @@ const MedicalReport = () => {
     ]
   };
 
+  // Add detailed report data
+  const detailedReports: { [key: string]: MedicalReportData } = {
+    'Blood Test Results': {
+      height: '1 cm',
+      weight: '203 kg',
+      bmi: '182778.3',
+      bp: '69/420',
+      pulse: '453456',
+      tests: [
+        {
+          category: 'HAEMATOLOGY',
+          items: [
+            { name: 'ESR', result: '18.4', unit: 'g/mol', range: '10.3-22.5' },
+            { name: 'ESR', result: '18.4', unit: 'g/mol', range: '10.3-22.5' },
+            { name: 'ESR', result: '18.4', unit: 'g/mol', range: '10.3-22.5' },
+            { name: 'ESR', result: '18.4', unit: 'g/mol', range: '10.3-22.5' },
+            { name: 'ESR', result: '18.4', unit: 'g/mol', range: '10.3-22.5' },
+          ]
+        },
+        {
+          category: 'HAEMATOLOGY',
+          items: [
+            { name: 'ESR', result: '18.4', unit: 'g/mol', range: '10.3-22.5' },
+            { name: 'ESR', result: '18.4', unit: 'g/mol', range: '10.3-22.5' },
+            { name: 'ESR', result: '18.4', unit: 'g/mol', range: '10.3-22.5' },
+            { name: 'ESR', result: '18.4', unit: 'g/mol', range: '10.3-22.5' },
+            { name: 'ESR', result: '18.4', unit: 'g/mol', range: '10.3-22.5' },
+          ]
+        }
+      ]
+    }
+    // Add more detailed reports as needed
+  };
+
   const toggleExpand = (key: string) => {
     setExpandedItems(prev => ({
       ...prev,
       [key]: !prev[key]
     }));
+  };
+
+  const handleReportPress = (report: string) => {
+    if (detailedReports[report]) {
+      router.push({
+        pathname: "/medicalReport/details",
+        params: { 
+          title: report,
+          data: JSON.stringify(detailedReports[report])
+        }
+      });
+    }
   };
 
   return (
@@ -130,13 +195,14 @@ const MedicalReport = () => {
             
             <ScrollView>
               {reports.map((item, index) => (
-                <View
+                <TouchableOpacity
                   key={index}
+                  onPress={() => handleReportPress(item.report)}
                   className="flex-row justify-between p-4 border-b border-gray-200"
                 >
                   <Text className="text-gray-700">{item.report}</Text>
                   <Text className="text-gray-700">{item.date}</Text>
-                </View>
+                </TouchableOpacity>
               ))}
             </ScrollView>
           </View>
