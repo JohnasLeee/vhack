@@ -62,7 +62,7 @@ export default function App() {
               text="Book an Appointment"
               onPress={() => console.log("Icon 1 pressed")}
             />
-            <Link href = "medicalReport">
+            <Link href = "/medicalReport">
               <NavItem
                 icon={<Ionicons name="document-text" size={42} color="black" />}
                 text="Access Medical Records"
