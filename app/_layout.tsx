@@ -1,6 +1,5 @@
 import React from 'react';
 import { Stack } from 'expo-router';
-import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 
 export default function RootLayout() {
   return (
@@ -11,18 +10,7 @@ export default function RootLayout() {
       />
       <Stack.Screen 
         name="medicalReport" 
-        options={{
-          headerShown: true,
-          headerShadowVisible: false,
-          headerStyle: {
-            backgroundColor: '#fbbf24',
-          },
-          headerTintColor: '#374151',
-          headerTitleStyle: {
-            fontWeight: '600',
-          },
-          title: 'Reports',
-        } as NativeStackNavigationOptions} 
+        options={{ headerShown: false }} 
       />
     </Stack>
   );
