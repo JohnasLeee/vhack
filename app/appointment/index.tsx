@@ -17,6 +17,8 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useState } from "react";
+import { GestureHandlerRootView, TextInput } from "react-native-gesture-handler";
+import { Picker } from "@react-native-picker/picker";
 
 const DoctorCard = ({
   name,
@@ -36,8 +38,7 @@ const DoctorCard = ({
       style={{ backgroundColor: "#E1E3Ef" }}
     >
       <Image
-        className="h-24 w-24 "
-        style={{ borderRadius: "4px" }}
+        className="h-24 w-24 rounded-lg"
         source={{ uri: picture }}
       />
       <View className="p-2">
@@ -210,56 +211,49 @@ export default function App() {
           />
           <View
             style={{
-              fontSize: "14px",
-              padding: "1rem",
+               padding: "1rem",
               alignItems: "center",
               textAlign: "center",
             }}
           >
-            <p>
-              You’re about to have a tele-consultation with{" "}
+            <Text>
+              You’re about to have a tele-consultation with
               {doctors[isDoctorClicked.doctor].name}. Get ready to be touched.
-            </p>
+            </Text>
           </View>
           <View>
           <View>
-            <p style={{ paddingBottom: "1rem" }}>Date</p>
+            <Text style={{ paddingBottom: "1rem" }}>Date</Text>
+            <GestureHandlerRootView>
             <View className="">
-              <input
+              <TextInput
                 type="date"
                 className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
                 aria-label="Select date"
-                id="date"
-                name="date"
+
               />
             </View>
-
+            </GestureHandlerRootView>
           </View>
 
           <View>
-            <p style={{ paddingBottom: "1rem", paddingTop: "1rem" }}>Time</p>
-            <View className="">
-              <select
-                className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
-                aria-label="Select time"
-                id="time"
-                name="time"
-              >
-                {/* Generate options for times from 10 AM to 5 PM */}
-                {Array.from({ length: 8 }, (_, index) => {
-                  const hour = 10 + index;
-                  const formattedTime = `${hour % 12 || 12} ${
-                    hour < 12 ? "AM" : "PM"
-                  }`;
-                  return (
-                    <option key={hour} value={formattedTime}>
-                      {formattedTime}
-                    </option>
-                  );
-                })}
-              </select>
-            </View>
-            </View>
+      <Text style={{ paddingBottom: 16, paddingTop: 16 }}>Time</Text>
+      <View>
+        <Picker
+          selectedValue="10 AM"
+           className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md "
+          onValueChange={(itemValue) => console.log(itemValue)}
+        >
+          {Array.from({ length: 8 }, (_, index) => {
+            const hour = 10 + index;
+            const formattedTime = `${hour % 12 || 12} ${hour < 12 ? "AM" : "PM"}`;
+            return (
+              <Picker.Item key={hour} label={formattedTime} value={formattedTime} />
+            );
+          })}
+        </Picker>
+      </View>
+    </View>
           </View>
           <View className="justify-center items-center p-4">
             <View className="h-16 w-24 rounded-lg">
@@ -278,19 +272,21 @@ export default function App() {
       ) : isDoctorClicked.doctor === -1 ? (
         <View>
  <View className="p-4">
-      <p>Select a Doctor</p>
+      <Text>Select a Doctor</Text>
     </View>
     <View className="p-4">
-      <input
+    <GestureHandlerRootView>
+      <TextInput
         className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
         aria-label="Search doctor"
         type="text"
-        id="name"
-        name="name"
+                id="doctorNames"
+                name="doctorNames"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)} // Update search term on change
         placeholder="Search for a doctor"
       />
+       </GestureHandlerRootView>
     </View>
     <View className="p-2">
       {(filteredDoctors.length > 0 || searchTerm == "" )? (
@@ -306,7 +302,7 @@ export default function App() {
           />
         ))
       ) : (
-        <p>No doctors found</p>
+        <Text>No doctors found</Text>
       )}
     </View>
         </View>
@@ -316,12 +312,13 @@ export default function App() {
             <TouchableOpacity
               onPress={() => setIsDoctorClicked({ doctor: -1, book: false })}
             >
-              Back
+              <Text>
+              Back</Text>
             </TouchableOpacity>
           </View>
           <View className="p-4">
             <View>
-              <p>{doctors[isDoctorClicked.doctor].name}</p>
+              <Text>{doctors[isDoctorClicked.doctor].name}</Text>
             </View>
             <View
               className="m-2 p-4 rounded-lg shadow-lg flex flex-row"
@@ -329,31 +326,31 @@ export default function App() {
             >
               <View>
                 <Image
-                  className="h-24 w-24"
-                  style={{ borderRadius: "4px" }}
+                  className="h-24 w-24 rounded-lg"
                   source={{ uri: doctors[isDoctorClicked.doctor].picture }}
                 />
               </View>
-              <View style={{ fontSize: "14px", paddingLeft: "1rem" }}>
-                <p>Email: {doctors[isDoctorClicked.doctor].email}</p>
-                <p>Tel: {doctors[isDoctorClicked.doctor].contactNumber}</p>
-                <p>Room: {doctors[isDoctorClicked.doctor].roomNo}</p>
+              <View style={{  paddingLeft: "1rem" }}>
+                <Text> Email: {doctors[isDoctorClicked.doctor].email}</Text>
+                <Text>Tel: {doctors[isDoctorClicked.doctor].contactNumber}</Text>
+                <Text>Room: {doctors[isDoctorClicked.doctor].roomNo}</Text>
               </View>
             </View>
-            <View style={{ fontSize: "14px", paddingTop: "1rem" }}>
-              <h2 style={{ fontSize: "18px", fontWeight: "bold" }}>
+            <View style={{ paddingTop: "1rem" }}>
+              <Text style={{  fontWeight: "bold" }}>
                 Biography
-              </h2>
-              <p>{doctors[isDoctorClicked.doctor].biography}</p>
+              </Text>
+              <Text>{doctors[isDoctorClicked.doctor].biography}</Text>
             </View>
-            <View style={{ fontSize: "14px", paddingTop: "1rem" }}>
+            <View className="pt-4">
               {Object.entries(
                 doctors[isDoctorClicked.doctor].appointmentAvailability
               ).map(([day, time]) => (
-                <p key={day}>
-                  <strong>{day.charAt(0).toUpperCase() + day.slice(1)}:</strong>{" "}
-                  {time}
-                </p>
+                <View className="flex flex-row ">
+                <Text className="font-bold" key={day}>
+                 {day.charAt(0).toUpperCase() + day.slice(1)} : 
+                </Text>
+                <Text className="pl-1">{time}</Text></View>
               ))}
             </View>
           </View>

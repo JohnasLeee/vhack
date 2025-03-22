@@ -28,22 +28,22 @@ const Counter = () => {
   return (
     <View
       className=" h-4 m-2 rounded-xl shadow-lg flex flex-row justify-between align-center"
-      style={{ width:"80px",backgroundColor: "#EFECEC", }}
+      style={{ width:80 ,backgroundColor: "#EFECEC", }}
     >
       <TouchableOpacity
         className=" rounded-xl w-8 justify-center align-center "
         style={{ backgroundColor: "#DBD7D7" }}
         onPress={decrement}
       >
-        <p style={{ fontWeight:"bold"}}className="text-center ">-</p>
+        <Text style={{ fontWeight:"bold"}}className="text-center ">-</Text>
       </TouchableOpacity>
-      <p  style={{ fontSize:"12px",fontWeight:"bold"}} className="">{count}</p>
+      <Text  style={{ fontSize:12 ,fontWeight:"bold"}} className="">{count}</Text>
       <TouchableOpacity
         className=" rounded-xl w-8 justify-center align-center"
         style={{ backgroundColor: "#DBD7D7" }}
         onPress={increment}
       >
-        <p style={{fontWeight:"bold"}} className="text-center">+</p>
+        <Text style={{fontWeight:"bold"}} className="text-center">+</Text>
       </TouchableOpacity>
     </View>
   );
@@ -62,7 +62,8 @@ export default function App() {
             className="m-2 p-4 rounded-lg shadow-lg flex flex-row"
             style={{ backgroundColor: "" }}
           >
-            It's time to take your medicine!!!!!
+<Text  className="m-2 p-4 ">
+            It's time to take your medicine!!!!!</Text>
           </View>
           <View
             className="m-2 p-2 rounded-lg shadow-lg flex flex-row"
@@ -71,14 +72,13 @@ export default function App() {
             <View className="w-full">
               <View className="flex flex-row">
                 <Image
-                  className="h-16 w-16 m-2"
-                  style={{ borderRadius: "4px" }}
+                  className="h-16 w-16 m-2 rounded-lg"
                   source={{ uri: "https://pngimg.com/d/syringe_PNG12395.png" }}
                 />
-                <View  className="p-2" style={{width:"220px"}}>
+                <View  className="p-2" style={{width:220 }}>
                   <View className="flex flex-row content-center  justify-between">
                     <View className="justify-center">
-                      <Text style={{fontWeight:"bold", fontSize:"15px"}}>Insulin Doses</Text>
+                      <Text style={{fontWeight:"bold", fontSize:15 }}>Insulin Doses</Text>
                     </View>
                     <Counter />
                   </View>
@@ -87,13 +87,13 @@ export default function App() {
                       style={{ width: "6rem", backgroundColor: "#FF9E9E" }}
                       className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                     >
-                      <p className="text-center" style={{ fontSize:"11px"}}>Before Lunch</p>
+                      <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
                     </View>
                     <View
                       className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                       style={{ width: "6rem", backgroundColor: "#BBAFFF" }}
                     >
-                      <p className="text-center" style={{ fontSize:"11px"}}>After Lunch</p>
+                      <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
                     </View>
                   </View>
                 </View>
@@ -107,14 +107,13 @@ export default function App() {
             <View className="w-full">
               <View className="flex flex-row">
                 <Image
-                  className="h-16 w-16 m-2"
-                  style={{ borderRadius: "4px" }}
+                  className="h-16 w-16 m-2 rounded-lg"
                   source={{ uri: "https://pngimg.com/d/syringe_PNG12395.png" }}
                 />
-                <View  className="p-2" style={{width:"220px"}}>
+                <View  className="p-2" style={{width:220 }}>
                   <View className="flex flex-row content-center  justify-between">
                     <View className="justify-center">
-                      <Text style={{fontWeight:"bold", fontSize:"15px"}}>Insulin Doses</Text>
+                      <Text style={{fontWeight:"bold", fontSize:15 }}>Insulin Doses</Text>
                     </View>
                     <Counter />
                   </View>
@@ -123,13 +122,13 @@ export default function App() {
                       style={{ width: "6rem", backgroundColor: "#FF9E9E" }}
                       className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                     >
-                      <p className="text-center" style={{ fontSize:"11px"}}>Before Lunch</p>
+                      <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
                     </View>
                     <View
                       className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                       style={{ width: "6rem", backgroundColor: "#BBAFFF" }}
                     >
-                      <p className="text-center" style={{ fontSize:"11px"}}>After Lunch</p>
+                      <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
                     </View>
                   </View>
                 </View>
@@ -143,14 +142,13 @@ export default function App() {
             <View className="w-full">
               <View className="flex flex-row">
                 <Image
-                  className="h-16 w-16 m-2"
-                  style={{ borderRadius: "4px" }}
+                  className="h-16 w-16 m-2 rounded-lg"
                   source={{ uri: "https://pngimg.com/d/syringe_PNG12395.png" }}
                 />
-                <View  className="p-2" style={{width:"220px"}}>
+                <View  className="p-2" style={{width:220 }}>
                   <View className="flex flex-row content-center  justify-between">
                     <View className="justify-center">
-                      <Text style={{fontWeight:"bold", fontSize:"15px"}}>Insulin Doses</Text>
+                      <Text style={{fontWeight:"bold", fontSize:15 }}>Insulin Doses</Text>
                     </View>
                     <Counter />
                   </View>
@@ -159,13 +157,13 @@ export default function App() {
                       style={{ width: "6rem", backgroundColor: "#FF9E9E" }}
                       className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                     >
-                      <p className="text-center" style={{ fontSize:"11px"}}>Before Lunch</p>
+                      <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
                     </View>
                     <View
                       className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                       style={{ width: "6rem", backgroundColor: "#BBAFFF" }}
                     >
-                      <p className="text-center" style={{ fontSize:"11px"}}>After Lunch</p>
+                      <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
                     </View>
                   </View>
                 </View>
@@ -179,14 +177,13 @@ export default function App() {
             <View className="w-full">
               <View className="flex flex-row">
                 <Image
-                  className="h-16 w-16 m-2"
-                  style={{ borderRadius: "4px" }}
+                  className="h-16 w-16 m-2 rounded-lg"
                   source={{ uri: "https://pngimg.com/d/syringe_PNG12395.png" }}
                 />
-                <View  className="p-2" style={{width:"220px"}}>
+                <View  className="p-2" style={{width:220 }}>
                   <View className="flex flex-row content-center  justify-between">
                     <View className="justify-center">
-                      <Text style={{fontWeight:"bold", fontSize:"15px"}}>Insulin Doses</Text>
+                      <Text style={{fontWeight:"bold", fontSize:15 }}>Insulin Doses</Text>
                     </View>
                     <Counter />
                   </View>
@@ -195,13 +192,13 @@ export default function App() {
                       style={{ width: "6rem", backgroundColor: "#FF9E9E" }}
                       className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                     >
-                      <p className="text-center" style={{ fontSize:"11px"}}>Before Lunch</p>
+                      <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
                     </View>
                     <View
                       className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                       style={{ width: "6rem", backgroundColor: "#BBAFFF" }}
                     >
-                      <p className="text-center" style={{ fontSize:"11px"}}>After Lunch</p>
+                      <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
                     </View>
                   </View>
                 </View>
