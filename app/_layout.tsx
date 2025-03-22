@@ -24,6 +24,38 @@ export default function RootLayout() {
           title: 'Reports',
         } as NativeStackNavigationOptions} 
       />
+      <Stack.Screen 
+        name="appointment" 
+        options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: '#fbbf24',
+          },
+          headerTintColor: '#374151',
+          headerTitleStyle: {
+            fontWeight: '600',
+          },
+          title: 'Appointments',
+        } as NativeStackNavigationOptions} 
+      />
+                <Stack.Screen 
+          name="medicine" 
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: '#fbbf24',
+            },
+            headerTintColor: '#374151',
+            headerTitleStyle: {
+              fontWeight: '600',
+            },
+            title: 'Medicine Tracker',
+          } as NativeStackNavigationOptions} 
+        />
     </Stack>
+    
+    
   );
 }
