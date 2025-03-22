@@ -45,7 +45,7 @@ const Teleconsultation = () => {
 
       <Text className="text-md mx-8 text-center">
         You're about to have a tele-consultation with{" "}
-        <Text className="font-bold">{selectedDoctor}</Text>. Get ready!
+        <Text className="font-bold">{selectedDoctor === "" ? "a doctor" : selectedDoctor}</Text>. Get ready!
       </Text>
 
       <View className="flex flex-col gap-4">
