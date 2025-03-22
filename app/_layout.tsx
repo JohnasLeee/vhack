@@ -17,7 +17,7 @@ export default function RootLayout() {
         name="bills-management" 
         options={{ headerShown: false }} 
       />
-      <Stack.Screen 
+      {/* <Stack.Screen 
         name="teleconsultation" 
         options={{
           headerShown: true,
@@ -31,7 +31,7 @@ export default function RootLayout() {
           },
           title: 'Teleconsultation',
         }} 
-      />
+      /> */}
       <Stack.Screen 
         name="appointment" 
         options={{
