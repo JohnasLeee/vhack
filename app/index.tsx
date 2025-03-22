@@ -78,7 +78,7 @@ export default function App() {
             <NavItem
               icon={<FontAwesome6 name="money-bills" size={36} color="black" />}
               text="Manage Bills & Payments"
-              onPress={() => console.log("Icon 4 pressed")}
+              onPress={() => router.push("/bills-management")}
             />
             <NavItem
               icon={
