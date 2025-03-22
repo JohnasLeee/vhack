@@ -17,21 +17,6 @@ export default function RootLayout() {
         name="bills-management" 
         options={{ headerShown: false }} 
       />
-      {/* <Stack.Screen 
-        name="teleconsultation" 
-        options={{
-          headerShown: true,
-          headerShadowVisible: false,
-          headerStyle: {
-            backgroundColor: '#fbbf24',
-          },
-          headerTintColor: '#374151',
-          headerTitleStyle: {
-            fontWeight: '600',
-          },
-          title: 'Teleconsultation',
-        }} 
-      /> */}
       <Stack.Screen 
         name="appointment" 
         options={{
@@ -78,7 +63,22 @@ export default function RootLayout() {
         } as NativeStackNavigationOptions} 
       />
       <Stack.Screen 
-        name="teleconsultation" 
+        name="teleconsultation/index" 
+        options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: '#fbbf24',
+          },
+          headerTintColor: '#374151',
+          headerTitleStyle: {
+            fontWeight: '600',
+          },
+          title: 'Teleconsultation',
+        } as NativeStackNavigationOptions} 
+      />
+      <Stack.Screen 
+        name="teleconsultation/call" 
         options={{
           headerShown: true,
           headerShadowVisible: false,
