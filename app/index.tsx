@@ -96,7 +96,7 @@ export default function App() {
                 <MaterialIcons name="meeting-room" size={42} color="black" />
               }
               text="Online Consultation"
-              onPress={() => console.log("Icon 6 pressed")}
+              onPress={() => router.push("/teleconsultation")}
             />
           </View>
         </View>
