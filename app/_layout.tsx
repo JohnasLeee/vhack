@@ -1,16 +1,29 @@
 import React from 'react';
-import AccessibilityTabs from "@/components/AccessibilityTabs";
-import "../global.css";
-import { Slot, usePathname } from "expo-router";
+import { Stack } from 'expo-router';
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 
-export default function App() {
-  const pathname = usePathname();
-  const isMainPage = pathname === '/';
-
+export default function RootLayout() {
   return (
-    <>
-      <Slot />
-      {/* {!isMainPage && <AccessibilityTabs />} */}
-    </>
+    <Stack>
+      <Stack.Screen 
+        name="index" 
+        options={{ headerShown: false }} 
+      />
+      <Stack.Screen 
+        name="medicalReport" 
+        options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: '#fbbf24',
+          },
+          headerTintColor: '#374151',
+          headerTitleStyle: {
+            fontWeight: '600',
+          },
+          title: 'Reports',
+        } as NativeStackNavigationOptions} 
+      />
+    </Stack>
   );
 }

@@ -8,7 +8,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import AccessibilityTabs from "@/components/AccessibilityTabs";
 
 const NavItem = ({
@@ -63,13 +63,11 @@ export default function App() {
               text="Book an Appointment"
               onPress={() => console.log("Icon 1 pressed")}
             />
-            <Link href = "/medicalReport">
               <NavItem
                 icon={<Ionicons name="document-text" size={42} color="black" />}
                 text="Access Medical Records"
-                onPress={() => console.log("Icon 2 pressed")}
+                onPress={() => router.push("/medicalReport")}
               />
-            </Link>
             <NavItem
               icon={<FontAwesome6 name="user-doctor" size={42} color="black" />}
               text="Find a Specialist"

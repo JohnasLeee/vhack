@@ -33,6 +33,9 @@ const MedicalReport = () => {
     { report: 'Cardiology Report', date: '15 Jan 2024' },
     { report: 'X-Ray Results', date: '05 Jan 2024' },
     { report: 'Diabetes Screening', date: '20 Dec 2023' },
+    { report: 'Diabetes Screening', date: '20 Dec 2023' },
+    { report: 'Diabetes Screening', date: '20 Dec 2023' },
+    { report: 'Diabetes Screening', date: '20 Dec 2023' },
     { report: 'Vision Test', date: '10 Dec 2023' },
     { report: 'Vision Test', date: '10 Dec 2023' },
     { report: 'Vision Test', date: '10 Dec 2023' },
@@ -124,11 +127,11 @@ const MedicalReport = () => {
   return (
     <View className="flex-1 bg-white">
       {/* Top bar with Reports title */}
-      <View className="bg-amber-400 p-4 items-center">
+      {/* <View className="bg-amber-400 p-4 items-center">
         <Text className="text-xl font-semibold text-gray-700">
           {activeTab === 'history' ? 'Report Luke Emia' : 'Reports'}
         </Text>
-      </View>
+      </View> */}
 
       {/* User info section */}
       <View className="bg-amber-400 px-4 pb-4">
@@ -138,7 +141,7 @@ const MedicalReport = () => {
             className="w-12 h-12 rounded-full mr-4"
           />
           <View>
-            <Text className="text-gray-700 text-base font-semibold">
+            <Text className="text-gray-700 text-xl font-semibold">
               Brendan Lai Young Shung
             </Text>
             <Text className="text-gray-700 text-sm">69.42 years old</Text>
@@ -146,7 +149,7 @@ const MedicalReport = () => {
         </View>
 
         {/* Tab toggles */}
-        <View className="flex-row justify-evenly w-full">
+        <View className="flex-row justify-evenly w-full pt-4">
           <TouchableOpacity
             onPress={() => setActiveTab('profile')}
             className=""
@@ -212,7 +215,7 @@ const MedicalReport = () => {
         <ScrollView className="flex-1 px-4 pt-4">
           <View className="space-y-3">
             {Object.entries(medicalHistory).map(([category, items]) => (
-              <View key={category} className="bg-white rounded-lg shadow">
+              <View key={category} className="my-4 bg-white rounded-lg shadow border border-black">
                 <TouchableOpacity
                   onPress={() => toggleExpand(category)}
                   className="flex-row justify-between items-center p-4"
