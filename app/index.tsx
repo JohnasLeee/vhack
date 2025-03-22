@@ -61,7 +61,7 @@ export default function App() {
             <NavItem
               icon={<AntDesign name="calendar" size={42} color="black" />}
               text="Book an Appointment"
-              onPress={() => console.log("Icon 1 pressed")}
+              onPress={() => router.push("/appointment")}
             />
               <NavItem
                 icon={<Ionicons name="document-text" size={42} color="black" />}
@@ -88,8 +88,8 @@ export default function App() {
                   color="black"
                 />
               }
-              text="Daily Meal Order"
-              onPress={() => console.log("Icon 5 pressed")}
+              text="Medicine Checker"
+              onPress={() => router.push("/medicine")}
             />
             <NavItem
               icon={
