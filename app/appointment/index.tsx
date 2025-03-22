@@ -143,7 +143,7 @@ export default function App() {
         "https://static.wikia.nocookie.net/fe820b3f-45b0-420b-b1ee-7d037e981e7c/scale-to-width/755",
       roomNo: 314,
       contactNumber: "+1 234 567 892",
-      email: "dr.you.shung.ungng@hospital.com",
+      email: "dr.you.shung@hospital.com",
       officeHours: "Monday - Friday: 9:00 AM - 5:00 PM",
       degrees: ["MD", "Neurology Specialist", "PhD in Neuroscience"],
       biography:
@@ -209,24 +209,19 @@ export default function App() {
             picture={doctors[isDoctorClicked.doctor].picture}
             onPress={() => 1 + 1}
           />
-          <View
-            style={{
-               padding: "1rem",
-              alignItems: "center",
-              textAlign: "center",
-            }}
+          <View className="m-4"
           >
             <Text>
-              You're about to have a tele-consultation with
+              You're about to have a tele-consultation with 
               {doctors[isDoctorClicked.doctor].name}. Get ready to be touched.
             </Text>
           </View>
+          <View className="mx-4">
           <View>
-          <View>
-            <Text style={{ paddingBottom: "1rem" }}>Date</Text>
+            <Text className="py-4">Date</Text>
             <GestureHandlerRootView>
             <View className="">
-              <TextInput
+              <TextInput 
                 type="date"
                 className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
                 aria-label="Select date"
@@ -238,10 +233,10 @@ export default function App() {
 
           <View>
       <Text style={{ paddingBottom: 16, paddingTop: 16 }}>Time</Text>
-      <View>
+      <View className="border border-gray-300 text-sm rounded-lg p-2 drop-shadow-md ">
         <Picker
           selectedValue="10 AM"
-           className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md "
+           
           onValueChange={(itemValue) => console.log(itemValue)}
         >
           {Array.from({ length: 8 }, (_, index) => {
@@ -309,19 +304,13 @@ export default function App() {
       ) : (
         <View>
           <View className="p-2">
-            <TouchableOpacity
-              onPress={() => setIsDoctorClicked({ doctor: -1, book: false })}
-            >
-              <Text>
-              Back</Text>
-            </TouchableOpacity>
           </View>
           <View className="p-4">
             <View>
-              <Text>{doctors[isDoctorClicked.doctor].name}</Text>
+              <Text className=" font-bold text-xl">{doctors[isDoctorClicked.doctor].name}</Text>
             </View>
             <View
-              className="m-2 p-4 rounded-lg shadow-lg flex flex-row"
+              className="p-4 my-4 rounded-lg shadow-lg flex flex-row"
               style={{ backgroundColor: "#E1E3Ef" }}
             >
               <View>
@@ -330,10 +319,10 @@ export default function App() {
                   source={{ uri: doctors[isDoctorClicked.doctor].picture }}
                 />
               </View>
-              <View style={{  paddingLeft: "1rem" }}>
-                <Text> Email: {doctors[isDoctorClicked.doctor].email}</Text>
-                <Text>Tel: {doctors[isDoctorClicked.doctor].contactNumber}</Text>
-                <Text>Room: {doctors[isDoctorClicked.doctor].roomNo}</Text>
+              <View className="p-2">
+                <Text>Email : {doctors[isDoctorClicked.doctor].email}</Text>
+                <Text>Tel : {doctors[isDoctorClicked.doctor].contactNumber}</Text>
+                <Text>Room : {doctors[isDoctorClicked.doctor].roomNo}</Text>
               </View>
             </View>
             <View style={{ paddingTop: "1rem" }}>
@@ -355,14 +344,25 @@ export default function App() {
               ))}
             </View>
           </View>
-          <View className="justify-center items-center">
-            <View className="h-16 w-24 rounded-lg">
-              <Button
+          <View className="justify-center items-center flex flex-row">
+            <View className="h-16 w-24 rounded-lg m-4">
+              <Button 
                 title="Select Doctor"
                 onPress={() =>
                   setIsDoctorClicked({
                     doctor: isDoctorClicked.doctor,
                     book: true,
+                  })
+                }
+              />
+            </View>
+            <View className="h-16 w-24 rounded-lg m-4">
+              <Button 
+                title="Back to Menu"
+                onPress={() =>
+                  setIsDoctorClicked({
+                    doctor: -1,
+                    book: false,
                   })
                 }
               />

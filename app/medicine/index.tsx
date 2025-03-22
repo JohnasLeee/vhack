@@ -16,7 +16,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 // Counter Component
 const Counter = () => {
@@ -27,23 +27,29 @@ const Counter = () => {
 
   return (
     <View
-      className=" h-4 m-2 rounded-xl shadow-lg flex flex-row justify-between align-center"
-      style={{ width:80 ,backgroundColor: "#EFECEC", }}
+      className=" h-6 m-4 rounded-xl shadow-lg flex flex-row justify-between align-center"
+      style={{ width: 80, backgroundColor: "#EFECEC" }}
     >
       <TouchableOpacity
         className=" rounded-xl w-8 justify-center align-center "
         style={{ backgroundColor: "#DBD7D7" }}
         onPress={decrement}
       >
-        <Text style={{ fontWeight:"bold"}}className="text-center ">-</Text>
+        <Text style={{ fontWeight: "bold" }} className="text-center ">
+          -
+        </Text>
       </TouchableOpacity>
-      <Text  style={{ fontSize:12 ,fontWeight:"bold"}} className="">{count}</Text>
+      <Text style={{ fontSize: 12, fontWeight: "bold" }} className="">
+        {count}
+      </Text>
       <TouchableOpacity
         className=" rounded-xl w-8 justify-center align-center"
         style={{ backgroundColor: "#DBD7D7" }}
         onPress={increment}
       >
-        <Text style={{fontWeight:"bold"}} className="text-center">+</Text>
+        <Text style={{ fontWeight: "bold" }} className="text-center">
+          +
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -51,23 +57,47 @@ const Counter = () => {
 
 // Main App Component
 export default function App() {
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(24, 0, 0, 0); // Set time to 12 AM next day
+  
+      const difference = midnight - now;
+      
+      return {
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / (1000 * 60)) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    };
+  
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  
+    useEffect(() => {
+      const timer = setInterval(() => {
+        setTimeLeft(calculateTimeLeft());
+      }, 1000);
+  
+      return () => clearInterval(timer);
+    }, []);
+  
+
   return (
-    <ScrollView >
+    <ScrollView>
       <View className="p-4">
-        <View>
+        <View className="m-4">
           <Text>Current Medication</Text>
         </View>
-        <View  >
+        <View>
           <View
-            className="m-2 p-4 rounded-lg shadow-lg flex flex-row"
-            style={{ backgroundColor: "" }}
+            className="flex flex-row gap-4 m-4 p-4 rounded-2xl elevation items-center bg-slate-100"
           >
-<Text  className="m-2 p-4 ">
-            It's time to take your medicine!!!!!</Text>
+            <Text className="m-2 p-4 font-bold">
+              You should take your medicine in {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+            </Text>
           </View>
           <View
-            className="m-2 p-2 rounded-lg shadow-lg flex flex-row"
-            style={{ backgroundColor: "" }}
+className="flex flex-row gap-4 p-4 m-4 rounded-2xl elevation items-center bg-slate-100"
           >
             <View className="w-full">
               <View className="flex flex-row">
@@ -75,10 +105,12 @@ export default function App() {
                   className="h-16 w-16 m-2 rounded-lg"
                   source={{ uri: "https://pngimg.com/d/syringe_PNG12395.png" }}
                 />
-                <View  className="p-2" style={{width:220 }}>
+                <View className="p-2" >
                   <View className="flex flex-row content-center  justify-between">
                     <View className="justify-center">
-                      <Text style={{fontWeight:"bold", fontSize:15 }}>Insulin Doses</Text>
+                      <Text style={{ fontWeight: "bold", fontSize: 15 }}>
+                        Insulin Doses
+                      </Text>
                     </View>
                     <Counter />
                   </View>
@@ -87,124 +119,24 @@ export default function App() {
                       style={{ width: 96, backgroundColor: "#FF9E9E" }}
                       className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                     >
-                      <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
+                      <Text className="text-center" style={{ fontSize: 11 }}>
+                        Before Lunch
+                      </Text>
                     </View>
                     <View
                       className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                       style={{ width: 96, backgroundColor: "#BBAFFF" }}
                     >
-                      <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
+                      <Text className="text-center" style={{ fontSize: 11 }}>
+                        After Lunch
+                      </Text>
                     </View>
                   </View>
                 </View>
               </View>
             </View>
           </View>
-          <View
-            className="m-2 p-2 rounded-lg shadow-lg flex flex-row"
-            style={{ backgroundColor: "" }}
-          >
-            <View className="w-full">
-              <View className="flex flex-row">
-                <Image
-                  className="h-16 w-16 m-2 rounded-lg"
-                  source={{ uri: "https://pngimg.com/d/syringe_PNG12395.png" }}
-                />
-                <View  className="p-2" style={{width:220 }}>
-                  <View className="flex flex-row content-center  justify-between">
-                    <View className="justify-center">
-                      <Text style={{fontWeight:"bold", fontSize:15 }}>Insulin Doses</Text>
-                    </View>
-                    <Counter />
-                  </View>
-                  <View className="flex flex-row justify-between ">
-                    <View
-                      style={{ width: 96, backgroundColor: "#FF9E9E" }}
-                      className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
-                    >
-                      <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
-                    </View>
-                    <View
-                      className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
-                      style={{ width: 96, backgroundColor: "#BBAFFF" }}
-                    >
-                      <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View
-            className="m-2 p-2 rounded-lg shadow-lg flex flex-row"
-            style={{ backgroundColor: "" }}
-          >
-            <View className="w-full">
-              <View className="flex flex-row">
-                <Image
-                  className="h-16 w-16 m-2 rounded-lg"
-                  source={{ uri: "https://pngimg.com/d/syringe_PNG12395.png" }}
-                />
-                <View  className="p-2" style={{width:220 }}>
-                  <View className="flex flex-row content-center  justify-between">
-                    <View className="justify-center">
-                      <Text style={{fontWeight:"bold", fontSize:15 }}>Insulin Doses</Text>
-                    </View>
-                    <Counter />
-                  </View>
-                  <View className="flex flex-row justify-between ">
-                    <View
-                      style={{ width: 96, backgroundColor: "#FF9E9E" }}
-                      className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
-                    >
-                      <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
-                    </View>
-                    <View
-                      className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
-                      style={{ width: 96, backgroundColor: "#BBAFFF" }}
-                    >
-                      <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View
-            className="m-2 p-2 rounded-lg shadow-lg flex flex-row"
-            style={{ backgroundColor: "" }}
-          >
-            <View className="w-full">
-              <View className="flex flex-row">
-                <Image
-                  className="h-16 w-16 m-2 rounded-lg"
-                  source={{ uri: "https://pngimg.com/d/syringe_PNG12395.png" }}
-                />
-                <View  className="p-2" style={{width:220 }}>
-                  <View className="flex flex-row content-center  justify-between">
-                    <View className="justify-center">
-                      <Text style={{fontWeight:"bold", fontSize:15 }}>Insulin Doses</Text>
-                    </View>
-                    <Counter />
-                  </View>
-                  <View className="flex flex-row justify-between ">
-                    <View
-                      style={{ width: 96, backgroundColor: "#FF9E9E" }}
-                      className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
-                    >
-                      <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
-                    </View>
-                    <View
-                      className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
-                      style={{ width: 96, backgroundColor: "#BBAFFF" }}
-                    >
-                      <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
+
         </View>
       </View>
     </ScrollView>
