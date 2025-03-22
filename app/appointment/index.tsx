@@ -8,7 +8,6 @@ import {
   ScrollView,
   Button,
 } from "react-native";
-import "../global.css";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -17,6 +16,39 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useState } from "react";
+import { GestureHandlerRootView, TextInput } from "react-native-gesture-handler";
+import { Picker } from "@react-native-picker/picker";
+
+const DoctorCard = ({
+  name,
+  specialty,
+  picture,
+  onPress,
+}: {
+  name: string;
+  specialty: string;
+  picture: string;
+  onPress: () => void;
+}) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      className="m-2 p-4 rounded-lg shadow-lg flex flex-row"
+      style={{ backgroundColor: "#E1E3Ef" }}
+    >
+      <Image
+        className="h-24 w-24 rounded-lg"
+        source={{ uri: picture }}
+      />
+      <View className="p-2">
+        <Text className="font-medium text-lg p-2">{name}</Text>
+        <Text className="text-gray-600 p-2">{specialty}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
 const NavItem = ({
   icon,
   text,
@@ -166,36 +198,95 @@ export default function App() {
     doctor.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
-    <View className="flex-1">
-      <LinearGradient
-        // Background Linear Gradient
-        colors={["#0A243B", "#4E5F69"]}
-        start={{ x: 0.13, y: 0.3 }}
-        end={{ x: 0.66, y: 1 }}
-        style={styles.background}
-      />
-      <View className="flex-1">
-        <View className="flex text-center flex-row gap-4 m-4 mb-0 items-center">
-          <View className="bg-white w-12 h-12 p-2 rounded-full flex justify-center items-center">
-            <FontAwesome name="user" size={24} color="black" />
+    <ScrollView className="p-0 ">
+
+      {isDoctorClicked.book ? (
+        <View className="p-4">
+          <DoctorCard
+            key={doctors[isDoctorClicked.doctor].id}
+            name={doctors[isDoctorClicked.doctor].name}
+            specialty={doctors[isDoctorClicked.doctor].specialty}
+            picture={doctors[isDoctorClicked.doctor].picture}
+            onPress={() => 1 + 1}
+          />
+          <View
+            style={{
+               padding: "1rem",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <Text>
+              You're about to have a tele-consultation with
+              {doctors[isDoctorClicked.doctor].name}. Get ready to be touched.
+            </Text>
+          </View>
+          <View>
+          <View>
+            <Text style={{ paddingBottom: "1rem" }}>Date</Text>
+            <GestureHandlerRootView>
+            <View className="">
+              <TextInput
+                type="date"
+                className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
+                aria-label="Select date"
+
+              />
+            </View>
+            </GestureHandlerRootView>
+          </View>
+
+          <View>
+      <Text style={{ paddingBottom: 16, paddingTop: 16 }}>Time</Text>
+      <View>
+        <Picker
+          selectedValue="10 AM"
+           className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md "
+          onValueChange={(itemValue) => console.log(itemValue)}
+        >
+          {Array.from({ length: 8 }, (_, index) => {
+            const hour = 10 + index;
+            const formattedTime = `${hour % 12 || 12} ${hour < 12 ? "AM" : "PM"}`;
+            return (
+              <Picker.Item key={hour} label={formattedTime} value={formattedTime} />
+            );
+          })}
+        </Picker>
+      </View>
+    </View>
+          </View>
+          <View className="justify-center items-center p-4">
+            <View className="h-16 w-24 rounded-lg">
+              <Button
+                title="Book"
+                onPress={() =>
+                  setIsDoctorClicked({
+                    doctor: -1,
+                    book: false,
+                  })
+                }
+              />
+            </View>
           </View>
         </View>
       ) : isDoctorClicked.doctor === -1 ? (
         <View>
  <View className="p-4">
-      <p>Select a Doctor</p>
+      <Text>Select a Doctor</Text>
     </View>
     <View className="p-4">
-      <input
+    <GestureHandlerRootView>
+      <TextInput
         className="border border-gray-300 text-sm rounded-lg p-4 drop-shadow-md"
         aria-label="Search doctor"
         type="text"
-        id="name"
-        name="name"
+                id="doctorNames"
+                name="doctorNames"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)} // Update search term on change
         placeholder="Search for a doctor"
       />
+       </GestureHandlerRootView>
     </View>
     <View className="p-2">
       {(filteredDoctors.length > 0 || searchTerm == "" )? (
@@ -211,57 +302,75 @@ export default function App() {
           />
         ))
       ) : (
-        <p>No doctors found</p>
+        <Text>No doctors found</Text>
       )}
     </View>
         </View>
-        <View className="flex mt-4 m-8 gap-6 items-center">
-          <View className="flex flex-row gap-4">
-            <NavItem
-              icon={<AntDesign name="calendar" size={42} color="black" />}
-              text="Book an Appointment"
-              onPress={() => router.push("/appointment")}
-            />
-              <NavItem
-                icon={<Ionicons name="document-text" size={42} color="black" />}
-                text="Access Medical Records"
-                onPress={() => router.push("/medicalReport")}
-              />
-            <NavItem
-              icon={<FontAwesome6 name="user-doctor" size={42} color="black" />}
-              text="Current Appointment"
-              onPress={() => router.push("/current-appointment")}
-            />
+      ) : (
+        <View>
+          <View className="p-2">
+            <TouchableOpacity
+              onPress={() => setIsDoctorClicked({ doctor: -1, book: false })}
+            >
+              <Text>
+              Back</Text>
+            </TouchableOpacity>
           </View>
-          <View className="flex flex-row gap-4">
-            <NavItem
-              icon={<FontAwesome6 name="money-bills" size={36} color="black" />}
-              text="Manage Bills & Payments"
-              onPress={() => router.push("/bills-management")}
-            />
-            <NavItem
-              icon={
-                <MaterialCommunityIcons
-                  name="silverware-fork-knife"
-                  size={42}
-                  color="black"
+          <View className="p-4">
+            <View>
+              <Text>{doctors[isDoctorClicked.doctor].name}</Text>
+            </View>
+            <View
+              className="m-2 p-4 rounded-lg shadow-lg flex flex-row"
+              style={{ backgroundColor: "#E1E3Ef" }}
+            >
+              <View>
+                <Image
+                  className="h-24 w-24 rounded-lg"
+                  source={{ uri: doctors[isDoctorClicked.doctor].picture }}
                 />
-              }
-              text="Medicine Checker"
-              onPress={() => router.push("/medicine")}
-            />
-            <NavItem
-              icon={
-                <MaterialIcons name="meeting-room" size={42} color="black" />
-              }
-              text="Online Consultation"
-              onPress={() => router.push("/teleconsultation")}
-            />
+              </View>
+              <View style={{  paddingLeft: "1rem" }}>
+                <Text> Email: {doctors[isDoctorClicked.doctor].email}</Text>
+                <Text>Tel: {doctors[isDoctorClicked.doctor].contactNumber}</Text>
+                <Text>Room: {doctors[isDoctorClicked.doctor].roomNo}</Text>
+              </View>
+            </View>
+            <View style={{ paddingTop: "1rem" }}>
+              <Text style={{  fontWeight: "bold" }}>
+                Biography
+              </Text>
+              <Text>{doctors[isDoctorClicked.doctor].biography}</Text>
+            </View>
+            <View className="pt-4">
+              {Object.entries(
+                doctors[isDoctorClicked.doctor].appointmentAvailability
+              ).map(([day, time]) => (
+                <View className="flex flex-row" key={day}>
+                  <Text className="font-bold">
+                    {day.charAt(0).toUpperCase() + day.slice(1)} : 
+                  </Text>
+                  <Text className="pl-1">{time}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+          <View className="justify-center items-center">
+            <View className="h-16 w-24 rounded-lg">
+              <Button
+                title="Select Doctor"
+                onPress={() =>
+                  setIsDoctorClicked({
+                    doctor: isDoctorClicked.doctor,
+                    book: true,
+                  })
+                }
+              />
+            </View>
           </View>
         </View>
-      </View>
-      <AccessibilityTabs />
-    </View>
+      )}
+    </ScrollView>
   );
 }
 
