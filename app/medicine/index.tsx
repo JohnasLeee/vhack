@@ -84,14 +84,14 @@ export default function App() {
                   </View>
                   <View className="flex flex-row justify-between ">
                     <View
-                      style={{ width: "6rem", backgroundColor: "#FF9E9E" }}
+                      style={{ width: 96, backgroundColor: "#FF9E9E" }}
                       className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                     >
                       <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
                     </View>
                     <View
                       className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
-                      style={{ width: "6rem", backgroundColor: "#BBAFFF" }}
+                      style={{ width: 96, backgroundColor: "#BBAFFF" }}
                     >
                       <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
                     </View>
@@ -119,14 +119,14 @@ export default function App() {
                   </View>
                   <View className="flex flex-row justify-between ">
                     <View
-                      style={{ width: "6rem", backgroundColor: "#FF9E9E" }}
+                      style={{ width: 96, backgroundColor: "#FF9E9E" }}
                       className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                     >
                       <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
                     </View>
                     <View
                       className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
-                      style={{ width: "6rem", backgroundColor: "#BBAFFF" }}
+                      style={{ width: 96, backgroundColor: "#BBAFFF" }}
                     >
                       <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
                     </View>
@@ -154,14 +154,14 @@ export default function App() {
                   </View>
                   <View className="flex flex-row justify-between ">
                     <View
-                      style={{ width: "6rem", backgroundColor: "#FF9E9E" }}
+                      style={{ width: 96, backgroundColor: "#FF9E9E" }}
                       className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                     >
                       <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
                     </View>
                     <View
                       className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
-                      style={{ width: "6rem", backgroundColor: "#BBAFFF" }}
+                      style={{ width: 96, backgroundColor: "#BBAFFF" }}
                     >
                       <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
                     </View>
@@ -189,14 +189,14 @@ export default function App() {
                   </View>
                   <View className="flex flex-row justify-between ">
                     <View
-                      style={{ width: "6rem", backgroundColor: "#FF9E9E" }}
+                      style={{ width: 96, backgroundColor: "#FF9E9E" }}
                       className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                     >
                       <Text className="text-center" style={{ fontSize:11 }}>Before Lunch</Text>
                     </View>
                     <View
                       className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
-                      style={{ width: "6rem", backgroundColor: "#BBAFFF" }}
+                      style={{ width: 96, backgroundColor: "#BBAFFF" }}
                     >
                       <Text className="text-center" style={{ fontSize:11 }}>After Lunch</Text>
                     </View>

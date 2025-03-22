@@ -1,6 +1,13 @@
 import React from 'react';
 import { Stack } from 'expo-router';
-import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList {
+      details: { title: string };
+    }
+  }
+}
 
 export default function Layout() {
   return (
@@ -25,7 +32,7 @@ export default function Layout() {
       <Stack.Screen 
         name='details'
         options={({ route }) => ({
-          title: route.params?.title || 'Report Details',
+          title: (route.params as { title: string } | undefined)?.title || 'Report Details',
           headerStyle:{
             backgroundColor: "white"
           }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Stack } from 'expo-router';
+import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 
 export default function RootLayout() {
   return (
