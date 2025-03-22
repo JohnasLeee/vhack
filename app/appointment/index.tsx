@@ -217,7 +217,7 @@ export default function App() {
             }}
           >
             <Text>
-              You’re about to have a tele-consultation with
+              You're about to have a tele-consultation with
               {doctors[isDoctorClicked.doctor].name}. Get ready to be touched.
             </Text>
           </View>
@@ -346,11 +346,12 @@ export default function App() {
               {Object.entries(
                 doctors[isDoctorClicked.doctor].appointmentAvailability
               ).map(([day, time]) => (
-                <View className="flex flex-row ">
-                <Text className="font-bold" key={day}>
-                 {day.charAt(0).toUpperCase() + day.slice(1)} : 
-                </Text>
-                <Text className="pl-1">{time}</Text></View>
+                <View className="flex flex-row" key={day}>
+                  <Text className="font-bold">
+                    {day.charAt(0).toUpperCase() + day.slice(1)} : 
+                  </Text>
+                  <Text className="pl-1">{time}</Text>
+                </View>
               ))}
             </View>
           </View>
