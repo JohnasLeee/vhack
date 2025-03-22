@@ -3,6 +3,7 @@ import React from "react";
 import { DoctorComponent } from "@/components/DoctorComponent";
 import { Picker } from "@react-native-picker/picker";
 import { Doctors } from "@/constants/Doctors";
+import { router } from "expo-router";
 
 const Teleconsultation = () => {
   const [selectedDoctor, setSelectedDoctor] = React.useState("");
@@ -16,6 +17,7 @@ const Teleconsultation = () => {
           selectedValue={selectedDoctor}
           onValueChange={(itemValue) => setSelectedDoctor(itemValue)}
         >
+          <Picker.Item label="Select a doctor..." value="" />
           {Doctors.map((doctor) => (
             <Picker.Item
               label={doctor.name}
@@ -45,7 +47,10 @@ const Teleconsultation = () => {
 
       <Text className="text-md mx-8 text-center">
         You're about to have a tele-consultation with{" "}
-        <Text className="font-bold">{selectedDoctor === "" ? "a doctor" : selectedDoctor}</Text>. Get ready!
+        <Text className="font-bold">
+          {selectedDoctor === "" ? "a doctor" : selectedDoctor}
+        </Text>
+        . Get ready!
       </Text>
 
       <View className="flex flex-col gap-4">
@@ -66,9 +71,12 @@ const Teleconsultation = () => {
       </View>
 
       <View>
-        <TouchableOpacity className="flex flex-row gap-4 p-4 rounded-2xl elevation justify-center items-center bg-yellow-600">
+        <TouchableOpacity
+          className="flex flex-row gap-4 p-4 rounded-2xl elevation justify-center items-center bg-yellow-600"
+          onPress={() => router.push("/teleconsultation/call")}
+        >
           <View>
-            <Text className="font-bold text-xl text-white">Test Room</Text>
+            <Text className="font-bold text-xl text-white">Start Consultation</Text>
           </View>
         </TouchableOpacity>
       </View>
