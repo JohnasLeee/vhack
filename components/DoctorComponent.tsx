@@ -1,4 +1,5 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
+import Text from "@/components/Text";
 
 interface DoctorComponentProps {
   url: string;

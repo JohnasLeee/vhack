@@ -1,6 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import Text, { useTextContext } from "@/components/Text";
+import Text from "@/components/Text";
 import "../global.css";
 import { LinearGradient } from "expo-linear-gradient";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -9,9 +8,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Link, router } from "expo-router";
-import AccessibilityTabs from "@/components/AccessibilityTabs";
-import { useEffect } from "react";
+import { router } from "expo-router";
 
 const NavItem = ({
   icon,

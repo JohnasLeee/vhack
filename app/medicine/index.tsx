@@ -1,21 +1,11 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
   Image,
   ScrollView,
-  Button,
 } from "react-native";
-import { useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Text from "@/components/Text";
 import { useState,useEffect } from "react";
 
 // Counter Component
@@ -39,7 +29,7 @@ const Counter = () => {
           -
         </Text>
       </TouchableOpacity>
-      <Text style={{ fontSize: 12, fontWeight: "bold" }} className="">
+      <Text style={{ fontWeight: "bold" }} className="text-sm">
         {count}
       </Text>
       <TouchableOpacity
@@ -108,7 +98,7 @@ className="flex flex-row gap-4 p-4 m-4 rounded-2xl elevation items-center bg-sla
                 <View className="p-2" >
                   <View className="flex flex-row content-center  justify-between">
                     <View className="justify-center">
-                      <Text style={{ fontWeight: "bold", fontSize: 15 }}>
+                      <Text style={{ fontWeight: "bold" }} className="text-lg">
                         Insulin Doses
                       </Text>
                     </View>
@@ -119,7 +109,7 @@ className="flex flex-row gap-4 p-4 m-4 rounded-2xl elevation items-center bg-sla
                       style={{ width: 96, backgroundColor: "#FF9E9E" }}
                       className=" p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                     >
-                      <Text className="text-center" style={{ fontSize: 11 }}>
+                      <Text className="text-center text-sm">
                         Before Lunch
                       </Text>
                     </View>
@@ -127,7 +117,7 @@ className="flex flex-row gap-4 p-4 m-4 rounded-2xl elevation items-center bg-sla
                       className="p-2 rounded-lg shadow-lg flex flex-row justify-center content-center"
                       style={{ width: 96, backgroundColor: "#BBAFFF" }}
                     >
-                      <Text className="text-center" style={{ fontSize: 11 }}>
+                      <Text className="text-center text-sm">
                         After Lunch
                       </Text>
                     </View>

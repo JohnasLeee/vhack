@@ -1,5 +1,4 @@
 import * as Brightness from 'expo-brightness';
-import { useTextContext } from './Text';
 
 const adjustBrightness = async (delta: number) => {
   const { status } = await Brightness.requestPermissionsAsync();

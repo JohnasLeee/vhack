@@ -1,13 +1,9 @@
-import { StatusBar } from "expo-status-bar";
 import {
-  StyleSheet,
-  Text,
   TouchableOpacity,
   View,
-  Image,
   ScrollView,
-  FlatList,
 } from "react-native";
+import Text from "@/components/Text";
 import { useState } from "react";
 
 type Payment = {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
-import AccessibilityTabs from "@/components/AccessibilityTabs";
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import Text from "@/components/Text";
+import { AntDesign } from '@expo/vector-icons';
 
 // Add type for medical report data
 type MedicalReportData = {

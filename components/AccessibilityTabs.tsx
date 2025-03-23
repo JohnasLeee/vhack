@@ -4,10 +4,9 @@ import {
   View,
   Animated,
   useAnimatedValue,
-  TouchableOpacity,
   ScrollView,
 } from "react-native";
-import Text from "./Text";
+import Text from "@/components/Text";
 import React, { createContext, useEffect, useRef, useState } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -58,7 +57,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
       setRecordingState("Initializing...");
 
       setRecordingTime(Date.now());
-      // await recordSpeech(audioRecordingRef, setRecordingState);
+      await recordSpeech(audioRecordingRef, setRecordingState);
     }
   };
 
@@ -71,18 +70,18 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
     // Check if recording is too short)
     const currentTime = Date.now();
     const timeDifference = currentTime - recordingTime;
-    // if (timeDifference < 1000) {
-    //   setRecordingState("Recording too short");
-    //   await audioRecordingRef.current.stopAndUnloadAsync();
-    //   return;
-    // }
+    if (timeDifference < 1000) {
+      setRecordingState("Recording too short");
+      await audioRecordingRef.current.stopAndUnloadAsync();
+      return;
+    }
 
     try {
-      const speechTranscript = "the screen is too bright";
-      // const speechTranscript = await transcribeSpeech(audioRecordingRef);
-      // setRecordingState(speechTranscript || "No transcript found");
+      // const speechTranscript = "the screen is too bright";
+      const speechTranscript = await transcribeSpeech(audioRecordingRef);
+      setRecordingState(speechTranscript || "No transcript found");
 
-      // if (!speechTranscript) return;
+      if (!speechTranscript) return;
 
       const commands = await getCommands(speechTranscript, GenericCommand);
       const commandsItem = commands
@@ -103,12 +102,13 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const accessibilityItemClicked = async (id: number) => {
+    console.log("Clicked", id);
     if (id === 3) {
       setSizeAdjustment((prev) => prev + 1);
     } else if (id === 4) {
       setSizeAdjustment((prev) => prev - 1);
     } else if (id === 2) {
-      router.push("/");
+      router.dismissAll();
     }
   }
 

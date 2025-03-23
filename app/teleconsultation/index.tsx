@@ -1,4 +1,5 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, TextInput, TouchableOpacity } from "react-native";
+import Text from "@/components/Text";
 import React from "react";
 import { DoctorComponent } from "@/components/DoctorComponent";
 import { Picker } from "@react-native-picker/picker";

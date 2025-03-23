@@ -1,12 +1,11 @@
 import {
   Pressable,
   StyleSheet,
-  Text,
   View,
   Animated,
-  TouchableOpacity,
   ScrollView,
 } from "react-native";
+import Text from "@/components/Text";
 import React, { useEffect, useRef, useState } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";

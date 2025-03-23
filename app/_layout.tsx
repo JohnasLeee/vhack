@@ -1,8 +1,6 @@
 import React from "react";
 import { Stack } from "expo-router";
 import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
-import AccessibilityTabs from "@/components/AccessibilityTabs";
-import { View } from "react-native";
 import AccessibilityProvider from "@/components/AccessibilityTabs";
 import { TextProvider } from "@/components/Text";
 

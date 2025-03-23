@@ -1,4 +1,4 @@
-import { decreaseBrightness, increaseBrightness, increaseTextSize, decreaseTextSize } from "@/components/AccessibilityActions";
+import { decreaseBrightness, increaseBrightness } from "@/components/AccessibilityActions";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export interface CommandType {
@@ -27,4 +27,5 @@ export const GenericCommandItem: CommandItem[] = [
   { id: 2, name: "Navigate to home page", icon: "home" },
   { id: 3, name: "Increase font size", icon: "format-font-size-increase" },
   { id: 4, name: "Decrease font size", icon: "format-font-size-decrease" },
+  { id: 5, name: "Increase contrast", icon: "contrast" },
 ]

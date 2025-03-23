@@ -1,5 +1,5 @@
 import Text from "@/components/Text";
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { CommandItem } from "@/constants/Commands";

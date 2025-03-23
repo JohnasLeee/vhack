@@ -1,21 +1,12 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
   Image,
   ScrollView,
   Button,
 } from "react-native";
-import { useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Text from "@/components/Text";
 import { useState } from "react";
 import { GestureHandlerRootView, TextInput } from "react-native-gesture-handler";
 import { Picker } from "@react-native-picker/picker";
