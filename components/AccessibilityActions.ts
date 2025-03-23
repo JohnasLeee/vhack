@@ -11,5 +11,5 @@ const adjustBrightness = async (delta: number) => {
   await Brightness.setSystemBrightnessAsync(currentBrightness + delta);
 }
 
-export const increaseBrightness = () => adjustBrightness(1);
-export const decreaseBrightness = () => adjustBrightness(-1);
+export const increaseBrightness = () => adjustBrightness(0.1);
+export const decreaseBrightness = () => adjustBrightness(-0.1);

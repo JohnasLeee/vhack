@@ -18,8 +18,8 @@ import { transcribeSpeech } from "@/functions/transcribeSpeech";
 import { getCommands } from "@/functions/getCommands";
 import {
   CommandItem,
-  GenericCommand,
   GenericCommandItem,
+  getGenericCommand,
 } from "@/constants/Commands";
 import AccessibilityListItem from "./AccessibilityListItem";
 import { router } from "expo-router";
@@ -86,7 +86,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (!speechTranscript) return;
 
-      const commands = await getCommands(speechTranscript, GenericCommand);
+      const commands = await getCommands(speechTranscript, getGenericCommand());
       const commandsItem = commands
         .map((command) => {
           const foundItem = GenericCommandItem.find(
@@ -112,6 +112,18 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
       setSizeAdjustment((prev) => prev - 1);
     } else if (id === 2) {
       router.dismissAll();
+    } else if (id === 5) {
+      router.push("/(tabs)")
+    } else if (id === 6) {
+      router.push("/(tabs)/current-appointment")
+    } else if (id === 7) {
+      router.push("/medicalReport")
+    } else if (id === 8) {
+      router.push("/bills-management")
+    } else if (id === 9) {
+      router.push("/medicine")
+    } else if (id === 10) {
+      router.push("/teleconsultation")
     }
   };
 
