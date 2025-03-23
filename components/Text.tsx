@@ -51,7 +51,7 @@ export const useTextContext = () => {
 const Text: React.FC<TextProps> = ({ className = '', style, ...props }) => {
   const { sizeAdjustment } = useTextContext();
   const classList = className.split(' ');
-  const fontSizeClass = classList.find(cls => fontSizeMap.hasOwnProperty(cls)) || 'text-base';
+  const fontSizeClass = classList.find(cls => fontSizeMap.hasOwnProperty(cls)) || 'text-sm';
   const filteredClassNames = classList.filter(cls => cls !== fontSizeClass).join(' ');
 
   const currentIndex = fontSizeKeys.indexOf(fontSizeClass);
