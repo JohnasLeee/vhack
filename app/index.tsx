@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import Text, { useTextContext } from "@/components/Text";
 import "../global.css";
 import { LinearGradient } from "expo-linear-gradient";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -10,6 +11,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Link, router } from "expo-router";
 import AccessibilityTabs from "@/components/AccessibilityTabs";
+import { useEffect } from "react";
 
 const NavItem = ({
   icon,
@@ -63,11 +65,11 @@ export default function App() {
               text="Book an Appointment"
               onPress={() => router.push("/(tabs)")}
             />
-              <NavItem
-                icon={<Ionicons name="document-text" size={42} color="black" />}
-                text="Access Medical Records"
-                onPress={() => router.push("/medicalReport")}
-              />
+            <NavItem
+              icon={<Ionicons name="document-text" size={42} color="black" />}
+              text="Access Medical Records"
+              onPress={() => router.push("/medicalReport")}
+            />
             <NavItem
               icon={<FontAwesome6 name="user-doctor" size={42} color="black" />}
               text="Current Appointment"
@@ -101,7 +103,7 @@ export default function App() {
           </View>
         </View>
       </View>
-      <AccessibilityTabs />
+      {/* <AccessibilityTabs /> */}
     </View>
   );
 }

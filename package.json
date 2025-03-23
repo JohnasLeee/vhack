@@ -43,7 +43,11 @@
     "react-native-svg": "15.8.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "expo-camera": "~16.0.18"
+    "expo-camera": "~16.0.18",
+    "expo-speech": "~13.0.1",
+    "expo-av": "~15.0.2",
+    "expo-brightness": "~13.0.3",
+    "expo-device": "~7.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

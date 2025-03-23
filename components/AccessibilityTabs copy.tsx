@@ -1,21 +1,18 @@
 import {
   Pressable,
   StyleSheet,
+  Text,
   View,
   Animated,
-  useAnimatedValue,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import Text from "./Text";
-import React, { createContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Svg, { Circle, Path } from "react-native-svg";
 import * as Haptics from "expo-haptics";
 import { Audio } from "expo-av";
-import { recordSpeech } from "@/functions/recordSpeech";
-import { transcribeSpeech } from "@/functions/transcribeSpeech";
 import { getCommands } from "@/functions/getCommands";
 import {
   CommandItem,
@@ -24,26 +21,18 @@ import {
 } from "@/constants/Commands";
 import AccessibilityListItem from "./AccessibilityListItem";
 import { router } from "expo-router";
-import { useTextContext } from "./Text";
 
-interface AccessibilityContextType {}
-const AccessibilityContext = createContext<
-  AccessibilityContextType | undefined
->(undefined);
-
-const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
+const AccessibilityTabs = () => {
   const [accessibilityItems, setAccessibilityItems] = useState<CommandItem[]>(
     []
   );
-  const { sizeAdjustment, setSizeAdjustment } = useTextContext();
-
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [recordingState, setRecordingState] = useState("");
+  const [recordingTime, setRecordingTime] = useState(0);
 
   const [permissionResponse, requestPermission] = Audio.usePermissions();
   const audioRecordingRef = useRef(new Audio.Recording());
 
-  const [recordingTime, setRecordingTime] = useState(0);
   const onPressIn = async () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
     if (permissionResponse && permissionResponse.status !== "granted") {
@@ -56,9 +45,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
       setAccessibilityItems([]);
       setIsPanelOpen(true);
       setRecordingState("Initializing...");
-
       setRecordingTime(Date.now());
-      // await recordSpeech(audioRecordingRef, setRecordingState);
     }
   };
 
@@ -68,22 +55,11 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setRecordingState("Processing recording...");
 
-    // Check if recording is too short)
     const currentTime = Date.now();
     const timeDifference = currentTime - recordingTime;
-    // if (timeDifference < 1000) {
-    //   setRecordingState("Recording too short");
-    //   await audioRecordingRef.current.stopAndUnloadAsync();
-    //   return;
-    // }
 
     try {
       const speechTranscript = "the screen is too bright";
-      // const speechTranscript = await transcribeSpeech(audioRecordingRef);
-      // setRecordingState(speechTranscript || "No transcript found");
-
-      // if (!speechTranscript) return;
-
       const commands = await getCommands(speechTranscript, GenericCommand);
       const commandsItem = commands
         .map((command) => {
@@ -95,8 +71,6 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
         .filter((item): item is CommandItem => item !== null);
 
       setAccessibilityItems(commandsItem);
-
-      console.log(commandsItem);
     } catch (e) {
       console.error(e);
     }
@@ -104,16 +78,16 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
 
   const accessibilityItemClicked = async (id: number) => {
     if (id === 3) {
-      setSizeAdjustment((prev) => prev + 1);
+      console.log("Increase size");
     } else if (id === 4) {
-      setSizeAdjustment((prev) => prev - 1);
+      console.log("Decrease size");
     } else if (id === 2) {
       router.push("/");
     }
-  }
+  };
 
-  const animatedPanelSpring = useAnimatedValue(0);
-  const animatedPanelEase = useAnimatedValue(0);
+  const animatedPanelSpring = useRef(new Animated.Value(0)).current;
+  const animatedPanelEase = useRef(new Animated.Value(0)).current;
 
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -131,8 +105,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
   }, [isPanelOpen]);
 
   return (
-    <AccessibilityContext.Provider value={{}}>
-      {children}
+    <View>
       <View style={styles.container}>
         <View
           style={{
@@ -142,9 +115,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
           }}
         >
           <Pressable
-            onPress={() => {
-              // setSizeAdjustment(2);
-            }}
+            onPress={() => console.log("Home")}
             android_ripple={{
               color: "rgba(255, 255, 255, 0.5)",
               borderless: true,
@@ -267,13 +238,11 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
           transformOrigin: "bottom",
           right: 0,
           zIndex: 1,
-          // marginHorizontal: 28,
           borderRadius: 24,
           height: animatedPanelSpring.interpolate({
             inputRange: [0, 1],
             outputRange: [0, 400],
           }),
-          // height: 400,
           width: "90%",
           elevation: 2,
         }}
@@ -338,15 +307,14 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
           </ScrollView>
         </Animated.View>
       </Animated.View>
-    </AccessibilityContext.Provider>
+    </View>
   );
 };
 
-export default AccessibilityProvider;
+export default AccessibilityTabs;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "#06263D",
     padding: 10,
     margin: 12,
     paddingVertical: 16,
@@ -357,11 +325,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     zIndex: 2,
-    // borderBottomLeftRadius: 32,
-    // borderBottomRightRadius: 32,
-    // borderTopLeftRadius: 12,
-    // borderTopRightRadius: 12,
-    // elevation: 4,
   },
   centerMic: {
     justifyContent: "center",
@@ -369,7 +332,6 @@ const styles = StyleSheet.create({
     width: 88,
     height: 88,
     borderRadius: 80,
-    // backgroundColor: "#06263D",
     position: "absolute",
     bottom: 0,
     zIndex: 1,
