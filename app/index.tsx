@@ -1,4 +1,10 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Text from "@/components/Text";
 import "../global.css";
 import { LinearGradient } from "expo-linear-gradient";
@@ -9,6 +15,7 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from "expo-router";
+import HighlightComponent from "@/components/HighlightComponent";
 
 const NavItem = ({
   icon,
@@ -34,7 +41,7 @@ const NavItem = ({
 
 export default function App() {
   return (
-    <View className="flex-1">
+    <ScrollView className="flex-1">
       <LinearGradient
         // Background Linear Gradient
         colors={["#0A243B", "#4E5F69"]}
@@ -49,10 +56,11 @@ export default function App() {
           </View>
           <Text className="text-white font-bold text-xl">Ng Young Shung</Text>
         </View>
-        <View className="flex bg-white m-4 p-4 rounded-lg">
+        <View className="flex bg-white m-4 px-4 py-3 rounded-lg">
+          <Text className="font-bold">Announcement</Text>
           <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            porro maiores enim voluptatum, architecto iusto.
+            With flu cases on the rise, protect yourself and those around you by
+            getting your flu shot at our hospital!
           </Text>
         </View>
         <View className="flex mt-4 m-8 gap-6 items-center">
@@ -99,9 +107,29 @@ export default function App() {
             />
           </View>
         </View>
+        <View className="mt-24 mb-32">
+          <Text className="text-xl font-bold mx-6">Highlights</Text>
+          <ScrollView
+            className="px-4 pt-4"
+            contentContainerStyle={{ gap: 16, paddingEnd: 32 }}
+            horizontal
+          >
+            <HighlightComponent
+              imageUri="https://freerangestock.com/sample/162681/senior-friends-enjoying-a-joke.jpg"
+              text="Year-end health screening promo"
+            />
+            <HighlightComponent
+              imageUri="https://cdn12.picryl.com/photo/2016/12/31/diabetes-blood-sugar-diabetic-science-technology-d929ab-1024.jpg"
+              text="Diabetes Management"
+            />
+            <HighlightComponent
+              imageUri="https://images.pexels.com/photos/6029056/pexels-photo-6029056.jpeg"
+              text="Flu prevention: Everything you need to know"
+            />
+          </ScrollView>
+        </View>
       </View>
-      {/* <AccessibilityTabs /> */}
-    </View>
+    </ScrollView>
   );
 }
 
