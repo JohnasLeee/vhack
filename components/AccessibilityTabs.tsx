@@ -37,7 +37,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
   const { sizeAdjustment, setSizeAdjustment } = useTextContext();
 
   const [isPanelOpen, setIsPanelOpen] = useState(false);
-  const [recordingState, setRecordingState] = useState("");
+  const [recordingState, setRecordingState] = useState("Hold button to record");
 
   const [permissionResponse, requestPermission] = Audio.usePermissions();
   const audioRecordingRef = useRef(new Audio.Recording());
@@ -54,7 +54,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
     } else {
       setAccessibilityItems([]);
       setIsPanelOpen(true);
-      setRecordingState("Initializing...");
+      setRecordingState("Hold button to record");
 
       setRecordingTime(Date.now());
       await recordSpeech(audioRecordingRef, setRecordingState);
@@ -71,7 +71,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
     const currentTime = Date.now();
     const timeDifference = currentTime - recordingTime;
     if (timeDifference < 1000) {
-      setRecordingState("Recording too short");
+      setRecordingState("Hold button to record");
       await audioRecordingRef.current.stopAndUnloadAsync();
       return;
     }
@@ -110,7 +110,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
     } else if (id === 2) {
       router.dismissAll();
     }
-  }
+  };
 
   const animatedPanelSpring = useAnimatedValue(0);
   const animatedPanelEase = useAnimatedValue(0);
@@ -312,29 +312,38 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
             >
               <Text className="text-lg text-white">{recordingState}</Text>
             </View>
-            <View
-              style={{
-                backgroundColor: "#fefefe",
-                padding: 12,
-                borderRadius: 12,
-                marginRight: 12,
-                alignSelf: "flex-start",
-              }}
-            >
-              {accessibilityItems.length > 0 ? (
-                accessibilityItems
-                  .slice(0, 4)
-                  .map((item) => (
-                    <AccessibilityListItem
-                      key={item.id}
-                      item={item}
-                      onPress={accessibilityItemClicked}
-                    />
-                  ))
-              ) : (
-                <Text className="text-lg">Hang on a second!</Text>
-              )}
-            </View>
+            {
+              // Much hardcode, much wow
+            ![
+              "Recording...",
+              "Hold button to record",
+              "Processing recording...",
+              "No transcript found",
+            ].includes(recordingState) && (
+              <View
+                style={{
+                  backgroundColor: "#fefefe",
+                  padding: 12,
+                  borderRadius: 12,
+                  marginRight: 12,
+                  alignSelf: "flex-start",
+                }}
+              >
+                {accessibilityItems.length > 0 ? (
+                  accessibilityItems
+                    .slice(0, 4)
+                    .map((item) => (
+                      <AccessibilityListItem
+                        key={item.id}
+                        item={item}
+                        onPress={accessibilityItemClicked}
+                      />
+                    ))
+                ) : (
+                  <Text className="text-lg">Hang on a second!</Text>
+                )}
+              </View>
+            )}
           </ScrollView>
         </Animated.View>
       </Animated.View>
