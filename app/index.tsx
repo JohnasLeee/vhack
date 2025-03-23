@@ -107,7 +107,7 @@ export default function App() {
             />
           </View>
         </View>
-        <View className="mt-24 mb-32">
+        <View className="mt-20 mb-32">
           <Text className="text-xl font-bold mx-6">Highlights</Text>
           <ScrollView
             className="px-4 pt-4"
