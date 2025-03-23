@@ -51,6 +51,9 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
     }
     if (isPanelOpen) {
       setIsPanelOpen(false);
+      await audioRecordingRef.current.stopAndUnloadAsync();
+      setRecordingState("Hold button to record");
+      setRecordingTime(0);
     } else {
       setAccessibilityItems([]);
       setIsPanelOpen(true);
@@ -271,7 +274,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
           borderRadius: 24,
           height: animatedPanelSpring.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, 400],
+            outputRange: [0, 300],
           }),
           // height: 400,
           width: "90%",
@@ -340,7 +343,7 @@ const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
                       />
                     ))
                 ) : (
-                  <Text className="text-lg">Hang on a second!</Text>
+                  <Text className="text-lg">Hang on a second...</Text>
                 )}
               </View>
             )}
