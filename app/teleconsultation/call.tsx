@@ -63,7 +63,7 @@ const Call = () => {
       <View className="flex bg-yellow-900 px-6 py-3 rounded-xl justify-center items-center absolute m-4">
         <Text className="text-white text-lg font-bold">Dr. Jane Doe</Text>
       </View>
-      <View className="flex-1 flex-row justify-center items-end mb-24 gap-4">
+      <View className="flex-1 flex-row justify-center items-end mb-48 gap-4">
         <TouchableOpacity className="" onPress={() => setIsMuted(!isUnmuted)}>
           <View className="bg-yellow-600 p-4 rounded-full flex justify-center items-center elevation">
             <MaterialCommunityIcons
