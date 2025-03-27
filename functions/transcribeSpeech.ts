@@ -65,9 +65,11 @@ export const transcribeSpeech = async (
           .then((res) => res.json())
           .catch((e: Error) => console.error(e));
 
-        const results = serverResponse?.results;
+        // const results = serverResponse?.results; // Google
+        const results = serverResponse?.text; // Whisper
         if (results) {
-          const transcript = results?.[0].alternatives?.[0].transcript;
+          // const transcript = results?.[0].alternatives?.[0].transcript; // Google
+          const transcript = results.trim(); // Whisper
           if (!transcript) return undefined;
           return transcript;
         } else {
